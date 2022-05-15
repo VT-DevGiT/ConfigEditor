@@ -121,7 +121,7 @@ namespace ScriptEditor.ConfigEditor
                     e.Cancel = false;
                     break;
                 case nameof(SymlContentItem.Action):
-                    e.Cancel = !line.IsRoomEdit;
+                    e.Cancel = line.GetCompletor == null;
                     break;
 
             }
@@ -132,6 +132,7 @@ namespace ScriptEditor.ConfigEditor
             var item = _listDetail.GridView.GetRow(e.RowHandle) as SymlContentItem;
             if (item != null && e.Column.FieldName == nameof(SymlContentItem.Value))
             {
+                /*
                 if (item.BoolValue)
                 {
                     RepositoryItemComboBox comb = new RepositoryItemComboBox();
@@ -142,6 +143,13 @@ namespace ScriptEditor.ConfigEditor
                 {
                     RepositoryItemComboBox comb = new RepositoryItemComboBox();
                     Program.Config.ValideRooms.ForEach(p => comb.Items.Add(p));
+                    e.RepositoryItem = comb;
+                }*/
+                if (item.GetCompletor != null)
+                {
+                    var completor = item.GetCompletor;
+                    RepositoryItemComboBox comb = new RepositoryItemComboBox();
+                    completor.ListValues.ForEach(p => comb.Items.Add(p));
                     e.RepositoryItem = comb;
                 }
                 else

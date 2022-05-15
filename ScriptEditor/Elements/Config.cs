@@ -16,6 +16,13 @@ namespace ScriptEditor.Elements
     [XmlRoot("CONFIG")]
     public class Config
     {
+        [XmlArray("Completors")]
+        [XmlArrayItem("Completor")]
+        public List<Completor> Completors
+        {
+            get; set;
+        }
+
         [XmlArray("Rooms")]
         [XmlArrayItem("Room")]
         public List<string> ValideRooms
@@ -25,16 +32,30 @@ namespace ScriptEditor.Elements
 
         public Config()
         {
-
+            Completors = new List<Completor>();
         }
 
         public static Config Default()
         {
             var config = new Config();
-            config.ValideRooms = new List<string>()
-            {
-                "LCZ_Toilets","LCZ_Cafe (15)","HCZ_EZ_Checkpoint"
-            };
+
+            var completorBool = new Completor();
+            completorBool.Name = "Bool";
+            completorBool.ListValues.Add("true");
+            completorBool.ListValues.Add("false");
+            completorBool.CompletorType = CompletorType.ByValue;
+            config.Completors.Add(completorBool);
+
+            var completorRoom = new Completor();
+            completorRoom.Name = "Room";
+            completorRoom.ListValues.Add("LCZ_Toilets");
+            completorRoom.ListValues.Add("LCZ_Cafe (15)");
+            completorRoom.ListValues.Add("HCZ_EZ_Checkpoint");
+            completorRoom.ContainWord = "room";
+            completorRoom.CompletorType = CompletorType.ByName;
+            config.Completors.Add(completorRoom);
+
+            config.Save();
             return config;
         }
 
@@ -65,6 +86,7 @@ namespace ScriptEditor.Elements
 
         public static Config Load()
         {
+
             if (File.Exists(FileName))
             {
                 string xml = File.ReadAllText(FileName);
@@ -76,7 +98,13 @@ namespace ScriptEditor.Elements
                     return (Config)xmlSerializer.Deserialize(xDoc.CreateReader());
                 }
             }
+
             return Config.Default();
+        }
+
+        internal Completor GetCompletor(SymlContentItem symlContentItem)
+        {
+            return Completors.FirstOrDefault(p => p.IsItemCompletor(symlContentItem));
         }
 
         internal void AddRoom(SymlContentItem item)
