@@ -11,7 +11,7 @@ namespace ScriptEditor
 {
     static class Program
     {
-        public static Config Config;
+        //public static Config Config;
         /// <summary>
         /// Point d'entrée principal de l'application.
         /// </summary>
@@ -20,7 +20,7 @@ namespace ScriptEditor
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Config = Config.Load();
+            Config.Load();
             ECSFormUtility.MainMdiParent = new MasterForm();
             Application.Run(ECSFormUtility.MainMdiParent);
         }

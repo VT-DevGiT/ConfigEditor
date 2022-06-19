@@ -11,7 +11,7 @@ namespace ScriptEditor.Managers
     {
 
         #region Attributes & Properties
-        protected IEnumerable<T> _results;
+        protected List<T> _results;
 
         private readonly List<T> _elements = new List<T>();
 
@@ -29,7 +29,7 @@ namespace ScriptEditor.Managers
             _results = new List<T>();
         }
 
-        public FixedListManager(IEnumerable<T> list)
+        public FixedListManager(List<T> list)
         {
             // Safe design
             if (list == null) { throw new ArgumentNullException(nameof(list)); }
@@ -40,9 +40,12 @@ namespace ScriptEditor.Managers
         #endregion
 
         #region Methods
-        public DelStatus Delete(T element)
+        public virtual DelStatus Delete(T element)
         {
-            throw new NotImplementedException();
+            _results.Remove(element);
+            LoadList();
+            
+            return DelStatus.Success;
         }
 
         public IDictionary<T, DelStatus> Delete(IEnumerable<T> element)
@@ -72,15 +75,10 @@ namespace ScriptEditor.Managers
             }
         }
 
-        public void LoadList(IEnumerable<T> elements)
+        public void LoadList(List<T> elements)
         {
-            Elements.Clear();
-
-            if (elements != null && elements.Any())
-            {
-                Elements.AddRange(elements);
-            }
-            OnElementListUpdated();
+            _results = elements;
+            LoadList();
         }
 
         public void UnloadList()
@@ -91,6 +89,7 @@ namespace ScriptEditor.Managers
 
         public void UpdateElement(object sender)
         {
+            OnElementListUpdated();
         }
         #endregion
 

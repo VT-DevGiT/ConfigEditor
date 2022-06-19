@@ -37,7 +37,6 @@ namespace ScriptEditor.ConfigEditor
         private SaveConfigCommand saveCommand;
         private AddListItemCommand addItemCommand;
         private DeleteListItemCommand deleteItemCommand;
-        private AddRoomCommand addRoomItemCommand;
         private SymlSectionManager _managerSection = new SymlSectionManager();
         private SymlDetailManager _managerDetail = new SymlDetailManager();
         private ListControl<SymlSection> _listSection;
@@ -82,8 +81,6 @@ namespace ScriptEditor.ConfigEditor
             _panelConfig.Fill(_listSection);
             _listSection.GridView.FocusedRowChanged += gridSection_FocusedRowChanged;
 
-            addRoomItemCommand = new AddRoomCommand();
-            _listDetail.Register("Add Room", addRoomItemCommand, "Add Room", true, true);
 
         }
 
@@ -163,11 +160,14 @@ namespace ScriptEditor.ConfigEditor
             {
                 if (item.IsRoomEdit)
                 {
-                    var editor = new RepositoryItemButtonEdit();
-                    editor.TextEditStyle = TextEditStyles.HideTextEditor;
-                    editor.Buttons[0].Kind = DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph;
-                    editor.Buttons[0].BindCommand(new ActionCommand(() => Program.Config.AddRoom(item)));
-                    e.RepositoryItem = editor;
+                    e.RepositoryItem = null;
+                    /*
+                        var editor = new RepositoryItemButtonEdit();
+                        editor.TextEditStyle = TextEditStyles.HideTextEditor;
+                        editor.Buttons[0].Kind = DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph;
+                        editor.Buttons[0].BindCommand(new ActionCommand(() => Program.Config.AddRoom(item)));
+                        e.RepositoryItem = editor;
+                    */
                 }
                 else
                     e.RepositoryItem = null;

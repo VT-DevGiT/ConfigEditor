@@ -1,4 +1,5 @@
-﻿using ScriptEditor.ConfigEditor;
+﻿using ScriptEditor.Attributes;
+using ScriptEditor.ConfigEditor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,23 +11,28 @@ namespace ScriptEditor.Elements
 {
     [Serializable]
     [XmlRoot("Completor")]
-    public class Completor
+    public class Completor : BaseUintElement
     {
         #region Attributes & Properties
+        [ECSDisplayColumn("Name", 1, 20)]
         [XmlElement("Name")]
-        public string Name { get; set; }
-        private List<string> _listValues = new List<string>();
+        public string Name {get;set;}
+        private List<CompletorValue> _listValues = new List<CompletorValue>();
         [XmlArray("Values")]
         [XmlArrayItem("Value")]
-        public List<string> ListValues => _listValues;
+        public List<CompletorValue> ListValues => _listValues;
+        
         [XmlElement("Type")]
+        [ECSDisplayColumn("Type", 1, 20)]
         public CompletorType CompletorType { get; set; }
 
         [XmlElement("Contain")]
+        [ECSDisplayColumn("Contain", 1, 12)]
         public string ContainWord { get; set; }
         #endregion
 
         #region Constructors & Destructor
+
         #endregion
 
         #region Methods
@@ -37,7 +43,7 @@ namespace ScriptEditor.Elements
 
             if (CompletorType == CompletorType.ByValue)
             {
-                return ListValues.Contains(synapseItem.Value);
+                return ListValues.Contains(new CompletorValue(synapseItem.Value));
             }
             else if (CompletorType == CompletorType.ByName)
             {
@@ -45,11 +51,11 @@ namespace ScriptEditor.Elements
             }
             else if (CompletorType == CompletorType.ByNameOrValue)
             {
-                return synapseItem.Name.ToLower().Contains(ContainWord.ToLower()) || ListValues.Contains(synapseItem.Value);
+                return synapseItem.Name.ToLower().Contains(ContainWord.ToLower()) || ListValues.Contains(new CompletorValue(synapseItem.Value));
             }
             else if (CompletorType == CompletorType.ByNameAndValue)
             {
-                return synapseItem.Name.ToLower().Contains(ContainWord.ToLower()) && ListValues.Contains(synapseItem.Value);
+                return synapseItem.Name.ToLower().Contains(ContainWord.ToLower()) && ListValues.Contains(new CompletorValue(synapseItem.Value));
             }
             return false;
         }

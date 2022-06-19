@@ -40,7 +40,7 @@ namespace ScriptEditor.ConfigEditor
 
         private void BuildList()
         {
-            Elements = Program.Config.ValideRooms.Select(p => new Room(p)).ToList();
+            //Elements = Program.Config.ValideRooms.Select(p => new Room(p)).ToList();
         }
 
         public event EventHandler ElementListUpdated;
@@ -48,8 +48,8 @@ namespace ScriptEditor.ConfigEditor
         public DelStatus Delete(Room element)
         {
             Elements.Remove(element);
-            Program.Config.ValideRooms.Remove(element.Name);
-            Program.Config.Save();
+            //Program.Config.ValideRooms.Remove(element.Name);
+            Config.Singleton.Save();
             OnElementListUpdated();
             return DelStatus.Success;
         }
@@ -57,7 +57,7 @@ namespace ScriptEditor.ConfigEditor
         public void LoadList()
         {
             Elements.Clear();
-            Elements.AddRange(Program.Config.ValideRooms.Select(p => new Room(p)).ToList());
+            //Elements.AddRange(Program.Config.ValideRooms.Select(p => new Room(p)).ToList());
             OnElementListUpdated();
         }
 
@@ -96,8 +96,8 @@ namespace ScriptEditor.ConfigEditor
                 System.Windows.Forms.MessageBox.Show("A room with that name already exist!");
                 return true;
             }
-            Program.Config.ValideRooms.Remove(CurrentRoom.Id);
-            Program.Config.ValideRooms.Add(CurrentRoom.Name);
+            //Program.Config.ValideRooms.Remove(CurrentRoom.Id);
+            //Program.Config.ValideRooms.Add(CurrentRoom.Name);
             Elements.Remove(CurrentRoom);
             CurrentRoom.Id = CurrentRoom.Name;
             Elements.Add(CurrentRoom);

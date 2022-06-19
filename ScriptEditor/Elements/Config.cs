@@ -16,16 +16,12 @@ namespace ScriptEditor.Elements
     [XmlRoot("CONFIG")]
     public class Config
     {
+        [XmlIgnore]
+        public static Config Singleton = new Config();
+        
         [XmlArray("Completors")]
         [XmlArrayItem("Completor")]
         public List<Completor> Completors
-        {
-            get; set;
-        }
-
-        [XmlArray("Rooms")]
-        [XmlArrayItem("Room")]
-        public List<string> ValideRooms
         {
             get; set;
         }
@@ -35,28 +31,55 @@ namespace ScriptEditor.Elements
             Completors = new List<Completor>();
         }
 
-        public static Config Default()
+        public uint GetCompletorId() 
         {
-            var config = new Config();
+            uint max = 0;
+            if (Completors.Any())
+            {
+                max = Completors.Max(p => p.Id);
+            }
+            return max + 1 ;
+        }
 
+        public uint GetCompletorValueId()
+        {
+            uint nextId = 0;
+            foreach (var completor in Config.Singleton.Completors)
+            {
+                if (completor.ListValues.Any())
+                {
+                    var max = completor.ListValues.Max(p => p.Id);
+                    if (max > nextId)
+                    {
+                        nextId = max;
+                    }
+                }
+            }
+            return nextId + 1;
+        }
+        public void Default()
+        {
             var completorBool = new Completor();
+            completorBool.Id = GetCompletorId();
             completorBool.Name = "Bool";
-            completorBool.ListValues.Add("true");
-            completorBool.ListValues.Add("false");
+            Singleton.Completors.Add(completorBool);
+            completorBool.ListValues.Add(new CompletorValue("true"));
+            completorBool.ListValues.Add(new CompletorValue("false"));
             completorBool.CompletorType = CompletorType.ByValue;
-            config.Completors.Add(completorBool);
+            
 
             var completorRoom = new Completor();
+            completorRoom.Id = GetCompletorId();
             completorRoom.Name = "Room";
-            completorRoom.ListValues.Add("LCZ_Toilets");
-            completorRoom.ListValues.Add("LCZ_Cafe (15)");
-            completorRoom.ListValues.Add("HCZ_EZ_Checkpoint");
+            Singleton.Completors.Add(completorRoom);
+            completorRoom.ListValues.Add(new CompletorValue("LCZ_Toilets"));
+            completorRoom.ListValues.Add(new CompletorValue("LCZ_Cafe (15)"));
+            completorRoom.ListValues.Add(new CompletorValue("HCZ_EZ_Checkpoint"));
             completorRoom.ContainWord = "room";
             completorRoom.CompletorType = CompletorType.ByName;
-            config.Completors.Add(completorRoom);
+            
 
-            config.Save();
-            return config;
+            Singleton.Save();
         }
 
         public string ToXml()
@@ -84,7 +107,7 @@ namespace ScriptEditor.Elements
             File.WriteAllText(FileName, ToXml());
         }
 
-        public static Config Load()
+        public static void Load()
         {
 
             if (File.Exists(FileName))
@@ -95,11 +118,14 @@ namespace ScriptEditor.Elements
                     var xDoc = XDocument.Parse(xml);
                     var xmlSerializer = new XmlSerializer(typeof(Config));
 
-                    return (Config)xmlSerializer.Deserialize(xDoc.CreateReader());
+                    Singleton = (Config)xmlSerializer.Deserialize(xDoc.CreateReader());
                 }
             }
-
-            return Config.Default();
+            else
+            {
+                Singleton = new Config();
+                Singleton.Default();
+            }
         }
 
         internal Completor GetCompletor(SymlContentItem symlContentItem)
@@ -107,13 +133,5 @@ namespace ScriptEditor.Elements
             return Completors.FirstOrDefault(p => p.IsItemCompletor(symlContentItem));
         }
 
-        internal void AddRoom(SymlContentItem item)
-        {
-            if (!ValideRooms.Contains(item.Value))
-            {
-                ValideRooms.Add(item.Value);
-                Save();
-            }
-        }
     }
 }

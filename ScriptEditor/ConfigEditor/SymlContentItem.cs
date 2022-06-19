@@ -105,7 +105,7 @@ namespace ScriptEditor.ConfigEditor
         {
             get
             {
-                return Program.Config.GetCompletor(this);
+                return Config.Singleton.GetCompletor(this);
             }
         }
 

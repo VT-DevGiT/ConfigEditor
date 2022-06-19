@@ -48,8 +48,9 @@ namespace ScriptEditor.Commands
             set
             {
                 bool canExecuteOld = CanExecuteValue;
+                bool canExec = _parameter?.Equals(value) != true;
                 _parameter = value;
-                RefreshCommandState(canExecuteOld != CanExecuteValue);
+                RefreshCommandState(canExec);// (canExecuteOld != CanExecuteValue);
 
                 // WARNING: This implementation generates a StackOverflow (circular call between OnCanExecuteChanged and the setter of property Parameter)
                 //_parameter = value;

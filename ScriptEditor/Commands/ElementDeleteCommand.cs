@@ -9,7 +9,6 @@ namespace ScriptEditor.Commands
     public class ElementDeleteCommand<T> : BaseCommand<T>
     {
         #region Properties
-
         protected override bool CanExecuteValue
         {
             get { return Parameter != null && _canExecuteFunction.Invoke(Parameter); }
@@ -33,7 +32,7 @@ namespace ScriptEditor.Commands
 
             if (String.IsNullOrWhiteSpace(question))
             {
-                _question = "Do you want to delet that item ?";
+                _question = "Do you want to delete that item ?";
             }
             _manager = manager;
             _canExecuteFunction = (e) => canExecute;
@@ -46,7 +45,7 @@ namespace ScriptEditor.Commands
             if (canExecuteFunction == null) { throw new ArgumentNullException(nameof(canExecuteFunction)); }
             if (String.IsNullOrWhiteSpace(question))
             {
-                _question = "Do you want to delet that item ?";
+                _question = "Do you want to delete that item ?";
             }
 
             _manager = manager;

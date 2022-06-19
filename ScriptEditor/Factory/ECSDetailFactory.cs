@@ -1,6 +1,7 @@
 ﻿using ScriptEditor.ConfigEditor;
 using ScriptEditor.Controls;
 using ScriptEditor.CustomClass;
+using ScriptEditor.Elements;
 using ScriptEditor.Interfaces;
 using ScriptEditor.Utils;
 
@@ -28,9 +29,15 @@ namespace ScriptEditor.Factory
         {
             return new CustomSynapseClassEditUC(manager);
         }
-        private static ECSEditUserControl GetDetailControl(IWriteManager manager, Room element)
+
+        private static ECSEditUserControl GetDetailControl(IWriteManager manager, Completor element)
         {
-            return new RoomEditUC(manager);
+            return new CompletorEditUC(manager);
+        }
+
+        private static ECSEditUserControl GetDetailControl(IWriteManager manager, CompletorValue element)
+        {
+            return new CompletorValueEditUC(manager);
         }
         #endregion
     }
