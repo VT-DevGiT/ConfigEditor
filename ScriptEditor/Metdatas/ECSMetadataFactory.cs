@@ -90,7 +90,7 @@ namespace ScriptEditor.Metadatas
         {
             Register<CustomSynapseClass>("Custom class", "ICN_CUSTOM_CLASS");
             Register<SynapseConfigEditor>("Config Editor", "ICN_CUSTOM_CLASS");
-            Register<Config>("Config", "ICN_CUSTOM_CLASS");
+            Register<Config>("Config Editor Parameter", "ICN_CUSTOM_CLASS");
             Register<DebugArme>("Arme", "ICN_CUSTOM_CLASS");
 
         }

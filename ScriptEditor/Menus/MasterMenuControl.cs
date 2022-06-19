@@ -45,18 +45,18 @@ namespace ScriptEditor.Menus
             ECSMenuGroup grpClass = (ECSMenuGroup)menuSynapse.Groups.Add(new ECSMenuGroup("Classe"));
             grpClass.AddItem<SynapseConfigEditor>();
             grpClass.AddItem<Config>();
-            grpClass.AddItem<CustomSynapseClass>();
+            //grpClass.AddItem<CustomSynapseClass>();
 
 
-            ECSMenuGroup grpArme = (ECSMenuGroup)menuSynapse.Groups.Add(new ECSMenuGroup("Arme"));
-            grpArme.AddItem<DebugArme>();
+            //ECSMenuGroup grpArme = (ECSMenuGroup)menuSynapse.Groups.Add(new ECSMenuGroup("Arme"));
+            //grpArme.AddItem<DebugArme>();
 
             menuSynapse.Visible = true;
             this._tabControl.TabPages.Add(new ECSMenuTabPage(menuSynapse));
 
-            var menuExiled = new ECSMenuControl("Exiled");
-            menuExiled.Visible = true;
-            this._tabControl.TabPages.Add(new ECSMenuTabPage(menuExiled));
+            //var menuExiled = new ECSMenuControl("Exiled");
+            //menuExiled.Visible = true;
+            //this._tabControl.TabPages.Add(new ECSMenuTabPage(menuExiled));
 
         }
         #endregion

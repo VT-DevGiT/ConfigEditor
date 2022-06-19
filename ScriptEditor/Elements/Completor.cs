@@ -43,7 +43,7 @@ namespace ScriptEditor.Elements
 
             if (CompletorType == CompletorType.ByValue)
             {
-                return ListValues.Contains(new CompletorValue(synapseItem.Value));
+                return ListValues.Any(p=> p.Value != null && p.Value== synapseItem.Value);
             }
             else if (CompletorType == CompletorType.ByName)
             {
@@ -51,11 +51,11 @@ namespace ScriptEditor.Elements
             }
             else if (CompletorType == CompletorType.ByNameOrValue)
             {
-                return synapseItem.Name.ToLower().Contains(ContainWord.ToLower()) || ListValues.Contains(new CompletorValue(synapseItem.Value));
+                return synapseItem.Name.ToLower().Contains(ContainWord.ToLower()) || ListValues.Any( p=> p.Value != null && p.Value.Contains(synapseItem.Value));
             }
             else if (CompletorType == CompletorType.ByNameAndValue)
             {
-                return synapseItem.Name.ToLower().Contains(ContainWord.ToLower()) && ListValues.Contains(new CompletorValue(synapseItem.Value));
+                return synapseItem.Name.ToLower().Contains(ContainWord.ToLower()) && ListValues.Any(p => p.Value != null && p.Value.Contains(synapseItem.Value));
             }
             return false;
         }
