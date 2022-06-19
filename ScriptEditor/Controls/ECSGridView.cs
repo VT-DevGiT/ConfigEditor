@@ -14,11 +14,11 @@ using DevExpress.XtraGrid.Menu;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
-using ScriptEditor.Attributes;
-using ScriptEditor.Interfaces;
-using ScriptEditor.Utils;
+using ConfigtEditor.Attributes;
+using ConfigtEditor.Interfaces;
+using ConfigtEditor.Utils;
 
-namespace ScriptEditor.Controls
+namespace ConfigtEditor.Controls
 {
     public sealed class ECSGridView : GridView, ICommandRegistrator
     {

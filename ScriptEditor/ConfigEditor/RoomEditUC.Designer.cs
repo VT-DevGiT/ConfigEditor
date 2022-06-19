@@ -1,4 +1,4 @@
-﻿namespace ScriptEditor.ConfigEditor
+﻿namespace ConfigtEditor.ConfigEditor
 {
     partial class RoomEditUC
     {
@@ -42,7 +42,7 @@
             // 
             // BindingDataSource
             // 
-            this.BindingDataSource.DataSource = typeof(ScriptEditor.ConfigEditor.Room);
+            this.BindingDataSource.DataSource = typeof(ConfigtEditor.ConfigEditor.Room);
             // 
             // layoutControl1
             // 

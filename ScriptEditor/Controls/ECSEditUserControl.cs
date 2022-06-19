@@ -4,12 +4,12 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
-using ScriptEditor.Commands;
-using ScriptEditor.Elements;
-using ScriptEditor.Interfaces;
-using ScriptEditor.Utils;
+using ConfigtEditor.Commands;
+using ConfigtEditor.Elements;
+using ConfigtEditor.Interfaces;
+using ConfigtEditor.Utils;
 
-namespace ScriptEditor.Controls
+namespace ConfigtEditor.Controls
 {
     public partial class ECSEditUserControl : ECSBarUserControl
     {

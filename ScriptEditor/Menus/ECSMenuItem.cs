@@ -1,9 +1,9 @@
 ﻿using System;
 using DevExpress.XtraEditors;
 using DevExpress.XtraNavBar;
-using ScriptEditor.Utils;
+using ConfigtEditor.Utils;
 
-namespace ScriptEditor.Menus
+namespace ConfigtEditor.Menus
 {
     public class ECSMenuItem : NavBarItem
     {

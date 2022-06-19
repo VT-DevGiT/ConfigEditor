@@ -1,4 +1,4 @@
-﻿namespace ScriptEditor.Forms
+﻿namespace ConfigtEditor.Forms
 {
     partial class ECSChildForm
     {

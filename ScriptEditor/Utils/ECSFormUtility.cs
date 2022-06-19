@@ -3,13 +3,13 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraBars.Docking2010.Views.Tabbed;
-using ScriptEditor.Controls;
-using ScriptEditor.Factory;
-using ScriptEditor.Forms;
-using ScriptEditor.Interfaces;
-using ScriptEditor.Metadatas;
+using ConfigtEditor.Controls;
+using ConfigtEditor.Factory;
+using ConfigtEditor.Forms;
+using ConfigtEditor.Interfaces;
+using ConfigtEditor.Metadatas;
 
-namespace ScriptEditor.Utils
+namespace ConfigtEditor.Utils
 {
     public static class ECSFormUtility
     {

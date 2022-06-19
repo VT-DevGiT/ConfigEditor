@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace ScriptEditor.Attributes
+namespace ConfigtEditor.Attributes
 {
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
     public class ECSDisplayColumnGroupAttribute : ECSDisplayColumnAttribute

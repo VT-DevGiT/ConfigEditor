@@ -1,4 +1,4 @@
-﻿namespace ScriptEditor.Controls
+﻿namespace ConfigtEditor.Controls
 {
     partial class ECSBarUserControl
     {

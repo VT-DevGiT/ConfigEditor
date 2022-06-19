@@ -1,4 +1,4 @@
-﻿namespace ScriptEditor.CustomClass
+﻿namespace ConfigtEditor.CustomClass
 {
     partial class CompletorValueEditUC
     {
@@ -44,7 +44,7 @@
             // 
             // BindingDataSource
             // 
-            this.BindingDataSource.DataSource = typeof(ScriptEditor.Elements.CompletorValue);
+            this.BindingDataSource.DataSource = typeof(ConfigtEditor.Elements.CompletorValue);
             // 
             // layoutControl1
             // 

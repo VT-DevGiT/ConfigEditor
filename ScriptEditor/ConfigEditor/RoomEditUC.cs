@@ -8,11 +8,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
-using ScriptEditor.Controls;
-using ScriptEditor.CustomClass;
-using ScriptEditor.Interfaces;
+using ConfigtEditor.Controls;
+using ConfigtEditor.CustomClass;
+using ConfigtEditor.Interfaces;
 
-namespace ScriptEditor.ConfigEditor
+namespace ConfigtEditor.ConfigEditor
 {
     public partial class RoomEditUC : ECSEditUserControl
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScriptEditor.Utils
+namespace ConfigtEditor.Utils
 {
     public abstract class BaseFactory<T>
     {

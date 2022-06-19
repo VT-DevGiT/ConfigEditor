@@ -1,4 +1,4 @@
-﻿namespace ScriptEditor
+﻿namespace ConfigtEditor
 {
     partial class MasterForm
     {
@@ -32,7 +32,7 @@
             this.DocumentManager = new DevExpress.XtraBars.Docking2010.DocumentManager(this.components);
             this._tabbedView = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
             this._sidePanel = new DevExpress.XtraEditors.SidePanel();
-            this.masterMenuControl1 = new ScriptEditor.Menus.MasterMenuControl();
+            this.masterMenuControl1 = new ConfigtEditor.Menus.MasterMenuControl();
             this._barManager = new DevExpress.XtraBars.BarManager(this.components);
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();

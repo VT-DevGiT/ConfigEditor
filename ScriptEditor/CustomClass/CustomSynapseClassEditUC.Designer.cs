@@ -1,4 +1,4 @@
-﻿namespace ScriptEditor.CustomClass
+﻿namespace ConfigtEditor.CustomClass
 {
     partial class CustomSynapseClassEditUC
     {
@@ -48,7 +48,7 @@
             // 
             // BindingDataSource
             // 
-            this.BindingDataSource.DataSource = typeof(ScriptEditor.CustomClass.CustomSynapseClass);
+            this.BindingDataSource.DataSource = typeof(ConfigtEditor.CustomClass.CustomSynapseClass);
             // 
             // _layoutControl
             // 

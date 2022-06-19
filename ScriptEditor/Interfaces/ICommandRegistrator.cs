@@ -1,7 +1,7 @@
 ﻿using DevExpress.XtraBars;
 
 
-namespace ScriptEditor.Interfaces
+namespace ConfigtEditor.Interfaces
 
 {
     internal interface ICommandRegistrator

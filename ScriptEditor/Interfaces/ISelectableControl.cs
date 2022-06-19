@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace ScriptEditor.Interfaces
+namespace ConfigtEditor.Interfaces
 {
     public interface ISelectableControl : IDisposable
     {

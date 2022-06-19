@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 
 
-namespace ScriptEditor.Utils
+namespace ConfigtEditor.Utils
 {
     public static class PanelControlExtensions
     {

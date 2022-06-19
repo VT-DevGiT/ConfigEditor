@@ -1,10 +1,10 @@
 ﻿using System.Drawing;
 using DevExpress.XtraEditors;
-using ScriptEditor.ConfigEditor;
-using ScriptEditor.CustomClass;
-using ScriptEditor.Elements;
+using ConfigtEditor.ConfigEditor;
+using ConfigtEditor.CustomClass;
+using ConfigtEditor.Elements;
 
-namespace ScriptEditor.Menus
+namespace ConfigtEditor.Menus
 {
     public partial class MasterMenuControl : XtraUserControl
     {

@@ -5,9 +5,8 @@ using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using DevExpress.Utils;
-using ScriptEditor.Properties;
 
-namespace ScriptEditor.Utils
+namespace ConfigtEditor.Utils
 {
     public static class ECSImageUtility
     {

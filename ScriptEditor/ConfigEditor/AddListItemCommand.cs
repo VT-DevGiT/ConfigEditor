@@ -1,11 +1,11 @@
-﻿using ScriptEditor.Commands;
+﻿using ConfigtEditor.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScriptEditor.ConfigEditor
+namespace ConfigtEditor.ConfigEditor
 {
     class AddListItemCommand : BaseCommand<SymlContentItem>
     {

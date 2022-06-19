@@ -8,17 +8,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
-using ScriptEditor.Controls;
-using ScriptEditor.Utils;
-using ScriptEditor.Managers;
+using ConfigtEditor.Controls;
+using ConfigtEditor.Utils;
+using ConfigtEditor.Managers;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraEditors.Controls;
-using ScriptEditor.Commands;
-using ScriptEditor.Interfaces;
+using ConfigtEditor.Commands;
+using ConfigtEditor.Interfaces;
 
-namespace ScriptEditor.ConfigEditor
+namespace ConfigtEditor.ConfigEditor
 {
     public partial class SynapseConfigEditorUC : ECSBarUserControl, IMultipleDisplay
     {

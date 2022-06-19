@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace ScriptEditor.Elements
+namespace ConfigtEditor.Elements
 {
 	public abstract class BaseElement : IEquatable<BaseElement>, IComparable<BaseElement>, IComparable
 	{
