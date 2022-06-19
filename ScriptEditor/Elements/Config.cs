@@ -16,26 +16,70 @@ namespace ScriptEditor.Elements
     [XmlRoot("CONFIG")]
     public class Config
     {
-        [XmlArray("Rooms")]
-        [XmlArrayItem("Room")]
-        public List<string> ValideRooms
+        [XmlIgnore]
+        public static Config Singleton = new Config();
+        
+        [XmlArray("Completors")]
+        [XmlArrayItem("Completor")]
+        public List<Completor> Completors
         {
             get; set;
         }
 
         public Config()
         {
-
+            Completors = new List<Completor>();
         }
 
-        public static Config Default()
+        public uint GetCompletorId() 
         {
-            var config = new Config();
-            config.ValideRooms = new List<string>()
+            uint max = 0;
+            if (Completors.Any())
             {
-                "LCZ_Toilets","LCZ_Cafe (15)","HCZ_EZ_Checkpoint"
-            };
-            return config;
+                max = Completors.Max(p => p.Id);
+            }
+            return max + 1 ;
+        }
+
+        public uint GetCompletorValueId()
+        {
+            uint nextId = 0;
+            foreach (var completor in Config.Singleton.Completors)
+            {
+                if (completor.ListValues.Any())
+                {
+                    var max = completor.ListValues.Max(p => p.Id);
+                    if (max > nextId)
+                    {
+                        nextId = max;
+                    }
+                }
+            }
+            return nextId + 1;
+        }
+        public void Default()
+        {
+            var completorBool = new Completor();
+            completorBool.Id = GetCompletorId();
+            completorBool.Name = "Bool";
+            Singleton.Completors.Add(completorBool);
+            completorBool.ListValues.Add(new CompletorValue("true"));
+            completorBool.ListValues.Add(new CompletorValue("false"));
+            completorBool.CompletorType = CompletorType.ByValue;
+            
+
+            var completorRoom = new Completor();
+            completorRoom.Id = GetCompletorId();
+            completorRoom.Name = "Room";
+            Singleton.Completors.Add(completorRoom);
+            completorRoom.ListValues.Add(new CompletorValue("LCZ_Toilets"));
+            completorRoom.ListValues.Add(new CompletorValue("LCZ_Cafe (15)"));
+            completorRoom.ListValues.Add(new CompletorValue("HCZ_EZ_Checkpoint"));
+            completorRoom.ContainWord = "room";
+            completorRoom.CompletorType = CompletorType.ByName;
+            
+
+            Singleton.Save();
         }
 
         public string ToXml()
@@ -63,8 +107,9 @@ namespace ScriptEditor.Elements
             File.WriteAllText(FileName, ToXml());
         }
 
-        public static Config Load()
+        public static void Load()
         {
+
             if (File.Exists(FileName))
             {
                 string xml = File.ReadAllText(FileName);
@@ -73,19 +118,20 @@ namespace ScriptEditor.Elements
                     var xDoc = XDocument.Parse(xml);
                     var xmlSerializer = new XmlSerializer(typeof(Config));
 
-                    return (Config)xmlSerializer.Deserialize(xDoc.CreateReader());
+                    Singleton = (Config)xmlSerializer.Deserialize(xDoc.CreateReader());
                 }
             }
-            return Config.Default();
-        }
-
-        internal void AddRoom(SymlContentItem item)
-        {
-            if (!ValideRooms.Contains(item.Value))
+            else
             {
-                ValideRooms.Add(item.Value);
-                Save();
+                Singleton = new Config();
+                Singleton.Default();
             }
         }
+
+        internal Completor GetCompletor(SymlContentItem symlContentItem)
+        {
+            return Completors.FirstOrDefault(p => p.IsItemCompletor(symlContentItem));
+        }
+
     }
 }

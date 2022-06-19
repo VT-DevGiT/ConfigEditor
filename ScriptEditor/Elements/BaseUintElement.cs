@@ -1,14 +1,16 @@
 ﻿using System;
 using System.ComponentModel;
-
+using System.Xml.Serialization;
 
 namespace ScriptEditor.Elements
 {
+    [Serializable]
     public abstract class BaseUintElement : BaseElement//, IEquatable<BaseUintElement>, IComparable<BaseUintElement>, IComparable
     {
         #region Properties
 
         [DefaultValue(UInt32.MaxValue)]
+        [XmlElement("Id")]
         public virtual uint Id { get; set; }
 
         protected sealed override int InternalId

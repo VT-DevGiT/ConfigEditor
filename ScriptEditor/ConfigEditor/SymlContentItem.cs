@@ -100,6 +100,15 @@ namespace ScriptEditor.ConfigEditor
                 //return ValideRooms.Contains(Value);
             }
         }
+
+        public Completor GetCompletor
+        {
+            get
+            {
+                return Config.Singleton.GetCompletor(this);
+            }
+        }
+
         [ECSDisplayColumn("Space Error", 3, 8)]
         public bool SpaceError
         {
