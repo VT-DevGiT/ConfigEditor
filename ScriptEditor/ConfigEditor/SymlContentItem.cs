@@ -64,38 +64,15 @@ namespace ConfigtEditor.ConfigEditor
         public string Name { get; set; }
         [ECSDisplayColumn("Value", 2, 20)]
         public string Value { get; set; }
-
-        // [ECSDisplayColumn("Id", 3, 10)]
         public uint Reference => Id;
-        //[ECSDisplayColumn("Parent", 3, 40)]
         public string ParentListName { get; set; }
-        // [ECSDisplayColumn("indent", 3, 10)]
-        //[ECSDisplayColumn("Indent", 3, 40)]
         public uint Indent { get; set; }
-        //[ECSDisplayColumn("List", 3, 10)]
-        //[ECSDisplayColumn("List", 3, 40)]
         public bool IsList { get; set; }
-        //[ECSDisplayColumn("List Item", 3, 10)]
-        //[ECSDisplayColumn("List item", 3, 40)]
         public bool IsListItem { get; set; }
-        //[ECSDisplayColumn("First List Item", 3, 10)]
         public bool IsFirstListItem { get; set; }
-        //[ECSDisplayColumn("Last List Item", 3, 10)]
         public bool IsLastListItem { get; set; }
-        //[ECSDisplayColumn("Bool Value", 3, 10)]
         public bool BoolValue { get; set; }
-
-        //[ECSDisplayColumn("Action", 3, 10)]
         public string Action { get; set; }
-
-        public bool IsRoomEdit
-        {
-            get
-            {
-                return Name.Trim().ToLower() == "room:";
-                //return ValideRooms.Contains(Value);
-            }
-        }
 
         public Completor GetCompletor
         {

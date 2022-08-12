@@ -143,17 +143,7 @@ namespace ConfigtEditor.ConfigEditor
                     e.RepositoryItem = btn;
                 }
             }
-            else if (item != null && e.Column.FieldName == nameof(SymlContentItem.Action))
-            {
-                if (item.IsRoomEdit)
-                {
-                    e.RepositoryItem = null;
-                }
-                else
-                    e.RepositoryItem = null;
-            }
-
-        }
+         }
         #endregion
 
     }
