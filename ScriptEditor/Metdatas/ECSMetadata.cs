@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 
-namespace ScriptEditor.Metadatas
+namespace ConfigtEditor.Metadatas
 {
     public struct ECSMetadata
     {

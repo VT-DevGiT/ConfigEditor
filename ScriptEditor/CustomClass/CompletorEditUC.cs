@@ -8,12 +8,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
-using ScriptEditor.Controls;
-using ScriptEditor.Interfaces;
-using ScriptEditor.Managers;
-using ScriptEditor.Elements;
+using ConfigtEditor.Controls;
+using ConfigtEditor.Interfaces;
+using ConfigtEditor.Managers;
+using ConfigtEditor.Elements;
 
-namespace ScriptEditor.CustomClass
+namespace ConfigtEditor.CustomClass
 {
     public partial class CompletorEditUC : ECSEditUserControl
     {

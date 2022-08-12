@@ -1,14 +1,14 @@
-﻿using ScriptEditor.Attributes;
-using ScriptEditor.Elements;
-using ScriptEditor.Interfaces;
-using ScriptEditor.Managers;
+﻿using ConfigtEditor.Attributes;
+using ConfigtEditor.Elements;
+using ConfigtEditor.Interfaces;
+using ConfigtEditor.Managers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScriptEditor.ConfigEditor
+namespace ConfigtEditor.ConfigEditor
 {
     public class Room : BaseStringElement
     {

@@ -4,10 +4,10 @@ using System.Drawing;
 using System.Windows.Forms;
 using DevExpress.XtraLayout;
 using DevExpress.XtraSplashScreen;
-using ScriptEditor.Controls;
-using ScriptEditor.Utils;
+using ConfigtEditor.Controls;
+using ConfigtEditor.Utils;
 
-namespace ScriptEditor.Forms
+namespace ConfigtEditor.Forms
 {
     public partial class ECSChildForm : DevExpress.XtraEditors.XtraForm
     {

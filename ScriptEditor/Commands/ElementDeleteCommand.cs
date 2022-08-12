@@ -1,10 +1,10 @@
-﻿using ScriptEditor.Elements;
-using ScriptEditor.Interfaces;
-using ScriptEditor.Utils;
+﻿using ConfigtEditor.Elements;
+using ConfigtEditor.Interfaces;
+using ConfigtEditor.Utils;
 using System;
 using System.Windows.Forms;
 
-namespace ScriptEditor.Commands
+namespace ConfigtEditor.Commands
 {
     public class ElementDeleteCommand<T> : BaseCommand<T>
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScriptEditor.Elements
+namespace ConfigtEditor.Elements
 {
     public class DelStatus : BaseUintElement
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Xml.Serialization;
 
-namespace ScriptEditor.Elements
+namespace ConfigtEditor.Elements
 {
     [Serializable]
     [XmlRoot("Type")]

@@ -1,8 +1,8 @@
 ﻿
-using ScriptEditor.Utils;
+using ConfigtEditor.Utils;
 using System;
 
-namespace ScriptEditor.Commands
+namespace ConfigtEditor.Commands
 {
     public class ElementResetCommand : BaseCommand
     {

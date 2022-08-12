@@ -1,4 +1,4 @@
-﻿namespace ScriptEditor.ConfigEditor
+﻿namespace ConfigtEditor.ConfigEditor
 {
     partial class SynapseConfigEditorUC
     {

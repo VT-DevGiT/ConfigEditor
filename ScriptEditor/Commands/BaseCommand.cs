@@ -1,8 +1,8 @@
-﻿using ScriptEditor.Interfaces;
+﻿using ConfigtEditor.Interfaces;
 using System;
 
 
-namespace ScriptEditor.Commands
+namespace ConfigtEditor.Commands
 {
     public abstract class BaseCommand<T, U> : BaseCommand<T>
     {

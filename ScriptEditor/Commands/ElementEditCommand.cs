@@ -1,14 +1,14 @@
-﻿using ScriptEditor.Controls;
-using ScriptEditor.Elements;
-using ScriptEditor.Factory;
-using ScriptEditor.Interfaces;
-using ScriptEditor.Utils;
+﻿using ConfigtEditor.Controls;
+using ConfigtEditor.Elements;
+using ConfigtEditor.Factory;
+using ConfigtEditor.Interfaces;
+using ConfigtEditor.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace ScriptEditor.Commands
+namespace ConfigtEditor.Commands
 {
     public class ElementEditCommand<T> : BaseCommand<T>
     {

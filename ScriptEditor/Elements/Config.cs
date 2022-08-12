@@ -8,9 +8,9 @@ using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
-using ScriptEditor.ConfigEditor;
+using ConfigtEditor.ConfigEditor;
 
-namespace ScriptEditor.Elements
+namespace ConfigtEditor.Elements
 {
     [Serializable]
     [XmlRoot("CONFIG")]

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 
-namespace ScriptEditor
+namespace ConfigtEditor
 {
     public partial class MasterForm : DevExpress.XtraEditors.XtraForm
     {

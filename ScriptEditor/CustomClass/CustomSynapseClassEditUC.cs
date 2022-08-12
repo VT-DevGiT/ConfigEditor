@@ -8,10 +8,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
-using ScriptEditor.Controls;
-using ScriptEditor.Interfaces;
+using ConfigtEditor.Controls;
+using ConfigtEditor.Interfaces;
 
-namespace ScriptEditor.CustomClass
+namespace ConfigtEditor.CustomClass
 {
     public partial class CustomSynapseClassEditUC : ECSEditUserControl
     {

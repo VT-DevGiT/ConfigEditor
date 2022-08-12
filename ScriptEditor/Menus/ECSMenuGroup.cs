@@ -1,10 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
 using DevExpress.XtraNavBar;
-using ScriptEditor.Metadatas;
-using ScriptEditor.Utils;
+using ConfigtEditor.Metadatas;
+using ConfigtEditor.Utils;
 
-namespace ScriptEditor.Menus
+namespace ConfigtEditor.Menus
 {
     public class ECSMenuGroup : NavBarGroup
     {

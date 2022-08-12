@@ -1,9 +1,9 @@
-﻿using ScriptEditor.Controls;
-using ScriptEditor.Interfaces;
+﻿using ConfigtEditor.Controls;
+using ConfigtEditor.Interfaces;
 using System;
 
 
-namespace ScriptEditor.Commands
+namespace ConfigtEditor.Commands
 {
     public class ElementSaveCommand : BaseCommand
     {

@@ -1,10 +1,10 @@
-﻿using ScriptEditor.Attributes;
+﻿using ConfigtEditor.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace ScriptEditor.Utils
+namespace ConfigtEditor.Utils
 {
     public static class ECSDisplayAnalyzer
     {

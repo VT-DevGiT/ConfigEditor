@@ -1,11 +1,11 @@
-﻿using ScriptEditor.ConfigEditor;
-using ScriptEditor.CustomClass;
-using ScriptEditor.Elements;
-using ScriptEditor.Utils;
+﻿using ConfigtEditor.ConfigEditor;
+using ConfigtEditor.CustomClass;
+using ConfigtEditor.Elements;
+using ConfigtEditor.Utils;
 using System;
 using System.Reflection;
 
-namespace ScriptEditor.Metadatas
+namespace ConfigtEditor.Metadatas
 {
     public sealed class ECSMetadataFactorySingleton
     {
