@@ -32,6 +32,8 @@ namespace ScriptEditor.CustomClass
             cbType.Properties.Items.Add(CompletorType.ByValue);
             cbType.Properties.Items.Add(CompletorType.ByNameOrValue);
             cbType.Properties.Items.Add(CompletorType.ByNameAndValue);
+
+            cbType.Properties.Items.Add(CompletorType.ByIsListContaing);
         }
     }
 }

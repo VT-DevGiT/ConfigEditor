@@ -83,21 +83,30 @@ namespace ScriptEditor.ConfigEditor
             foreach (SymlContentItem elem in list)
             {
                 int idx = ContentList.IndexOf(elem);
+                // Mark as a list
                 elem.IsList = true;
+                idx++;
+                var max = ContentList.Count;
+                while (idx < max && elem.Indent < ContentList[idx].Indent)
+                {
+                    var subItem = ContentList[idx];
+                    subItem.ParentListName = elem.Name;
+                    idx++;
+                }
+                idx = ContentList.IndexOf(elem);
+                // Copy structure in the list entry for Add
                 SymlContentItem toAdd;
                 do
                 {
                     idx++;
                     toAdd = ContentList[idx];
                     elem.StructureList().Add(toAdd.Copy());
-                } while (toAdd.Name == "-");
-                /*do
-                {
-                    idx++;
-                    toAdd = ContentList[idx];
-                    elem.StructureList().Add(toAdd.Copy());
-                } while (!toAdd.IsLastListItem);*/
+                } while (!toAdd.IsLastListItem);
             }
+
+
+            // Add Parent list name
+
         }
 
         private string Join(string[] splt, string v)
