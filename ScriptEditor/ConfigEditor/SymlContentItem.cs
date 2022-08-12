@@ -67,16 +67,16 @@ namespace ConfigtEditor.ConfigEditor
 
         // [ECSDisplayColumn("Id", 3, 10)]
         public uint Reference => Id;
-        [ECSDisplayColumn("Parent", 3, 40)]
+        //[ECSDisplayColumn("Parent", 3, 40)]
         public string ParentListName { get; set; }
         // [ECSDisplayColumn("indent", 3, 10)]
-        [ECSDisplayColumn("Indent", 3, 40)]
+        //[ECSDisplayColumn("Indent", 3, 40)]
         public uint Indent { get; set; }
         //[ECSDisplayColumn("List", 3, 10)]
-        [ECSDisplayColumn("List", 3, 40)]
+        //[ECSDisplayColumn("List", 3, 40)]
         public bool IsList { get; set; }
         //[ECSDisplayColumn("List Item", 3, 10)]
-        [ECSDisplayColumn("List item", 3, 40)]
+        //[ECSDisplayColumn("List item", 3, 40)]
         public bool IsListItem { get; set; }
         //[ECSDisplayColumn("First List Item", 3, 10)]
         public bool IsFirstListItem { get; set; }

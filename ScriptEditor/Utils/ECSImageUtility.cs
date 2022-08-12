@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using ConfigEditor.Properties;
 using DevExpress.Utils;
 
 namespace ConfigtEditor.Utils
