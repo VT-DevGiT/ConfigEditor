@@ -59,7 +59,7 @@ namespace ScriptEditor.Elements
             }
             else if (CompletorType == CompletorType.ByIsListConating)
             {
-                return true;
+                return false;
             }
             return false;
         }
