@@ -90,7 +90,13 @@ namespace ScriptEditor.ConfigEditor
                     idx++;
                     toAdd = ContentList[idx];
                     elem.StructureList().Add(toAdd.Copy());
-                } while (!toAdd.IsLastListItem);
+                } while (toAdd.Name == "-");
+                /*do
+                {
+                    idx++;
+                    toAdd = ContentList[idx];
+                    elem.StructureList().Add(toAdd.Copy());
+                } while (!toAdd.IsLastListItem);*/
             }
         }
 

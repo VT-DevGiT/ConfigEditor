@@ -83,15 +83,6 @@ namespace ScriptEditor.ConfigEditor
         //[ECSDisplayColumn("Action", 3, 10)]
         public string Action { get; set; }
 
-        public static List<string> ValideBool = new List<string>()
-        {
-            "","true","false"
-        };
-
-        public static List<string> ValideRooms = new List<string>()
-        {
-            "Root_*&*Outside Cams","A","C","D","E"
-        };
         public bool IsRoomEdit
         {
             get

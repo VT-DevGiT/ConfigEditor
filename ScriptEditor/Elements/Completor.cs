@@ -57,6 +57,10 @@ namespace ScriptEditor.Elements
             {
                 return synapseItem.Name.ToLower().Contains(ContainWord.ToLower()) && ListValues.Any(p => p.Value != null && p.Value.Contains(synapseItem.Value));
             }
+            else if (CompletorType == CompletorType.ByIsListConating)
+            {
+                return true;
+            }
             return false;
         }
         #endregion
