@@ -105,6 +105,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -217,7 +218,6 @@
     </Compile>
     <Compile Include="CustomClass\CustomSynapseClassManager.cs" />
     <Compile Include="CustomClass\CustomSynapseListClass.cs" />
-    <Compile Include="CustomClass\DebugArme.cs" />
     <Compile Include="ConfigEditor\RoomManager.cs" />
     <Compile Include="DialogWaitCommand.cs" />
     <Compile Include="Elements\BaseElement.cs" />
@@ -248,7 +248,6 @@
     <Compile Include="Interfaces\IWriteManager.cs" />
     <Compile Include="Managers\CompletorManager.cs" />
     <Compile Include="Managers\CompletorValueManager.cs" />
-    <Compile Include="Managers\ConfigManager.cs" />
     <Compile Include="Managers\FixedListManager.cs" />
     <Compile Include="Utils\BindingSourceExtensions.cs" />
     <Compile Include="Utils\ControlExtention.cs" />

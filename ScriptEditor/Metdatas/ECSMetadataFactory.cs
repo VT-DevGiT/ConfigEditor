@@ -88,11 +88,9 @@ namespace ConfigtEditor.Metadatas
 
         private void RegisterAll()
         {
-            Register<CustomSynapseClass>("Custom class", "ICN_CUSTOM_CLASS");
+            Register<CustomSynapseClass>("Custom class", "ICN_CUSTOM_CLASS"); // 
             Register<SynapseConfigEditor>("Config Editor", "ICN_CUSTOM_CLASS");
             Register<Config>("Config Editor Parameter", "ICN_CUSTOM_CLASS");
-            Register<DebugArme>("Arme", "ICN_CUSTOM_CLASS");
-
         }
 
         #endregion

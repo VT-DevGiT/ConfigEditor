@@ -76,14 +76,7 @@ namespace ConfigtEditor.Factory
                 return ctrl;
             });
 
-            Register<DebugArme>(() =>
-            {
-                var ctrl = new ECSUserControl();
 
-
-
-                return ctrl;
-            });
             Register<Config>(() => new ConfigUC());
         }
 

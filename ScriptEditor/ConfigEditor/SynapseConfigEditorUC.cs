@@ -107,6 +107,7 @@ namespace ConfigtEditor.ConfigEditor
                 _managerDetail.LoadContent(item);
             }
         }
+
         #region Events
         private void CustomShowEditor(object sender, CancelEventArgs e)
         {
