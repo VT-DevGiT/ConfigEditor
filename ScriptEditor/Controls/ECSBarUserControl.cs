@@ -1,8 +1,8 @@
 ﻿using System;
 using DevExpress.XtraBars;
-using ScriptEditor.Interfaces;
+using ConfigtEditor.Interfaces;
 
-namespace ScriptEditor.Controls
+namespace ConfigtEditor.Controls
 {
     public partial class ECSBarUserControl : ECSUserControl, ICommandRegistrator
     {

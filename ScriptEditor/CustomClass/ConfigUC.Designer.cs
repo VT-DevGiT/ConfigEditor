@@ -1,4 +1,4 @@
-﻿namespace ScriptEditor.CustomClass
+﻿namespace ConfigtEditor.CustomClass
 {
     partial class ConfigUC
     {

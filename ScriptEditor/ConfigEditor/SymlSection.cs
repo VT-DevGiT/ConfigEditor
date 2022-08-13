@@ -1,11 +1,11 @@
-﻿using ScriptEditor.Attributes;
+﻿using ConfigtEditor.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScriptEditor.ConfigEditor
+namespace ConfigtEditor.ConfigEditor
 {
     public class SymlSection
     {
@@ -83,7 +83,18 @@ namespace ScriptEditor.ConfigEditor
             foreach (SymlContentItem elem in list)
             {
                 int idx = ContentList.IndexOf(elem);
+                // Mark as a list
                 elem.IsList = true;
+                idx++;
+                var max = ContentList.Count;
+                while (idx < max && elem.Indent < ContentList[idx].Indent)
+                {
+                    var subItem = ContentList[idx];
+                    subItem.ParentListName = elem.Name;
+                    idx++;
+                }
+                idx = ContentList.IndexOf(elem);
+                // Copy structure in the list entry for Add
                 SymlContentItem toAdd;
                 do
                 {
@@ -92,6 +103,10 @@ namespace ScriptEditor.ConfigEditor
                     elem.StructureList().Add(toAdd.Copy());
                 } while (!toAdd.IsLastListItem);
             }
+
+
+            // Add Parent list name
+
         }
 
         private string Join(string[] splt, string v)

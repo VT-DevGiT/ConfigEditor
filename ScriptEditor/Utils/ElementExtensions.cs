@@ -1,11 +1,11 @@
-﻿using ScriptEditor.Elements;
+﻿using ConfigtEditor.Elements;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScriptEditor.Utils
+namespace ConfigtEditor.Utils
 {
     public static class ElementExtensions
     {

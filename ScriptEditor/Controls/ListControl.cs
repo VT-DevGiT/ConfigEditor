@@ -1,9 +1,9 @@
-﻿using ScriptEditor.Interfaces;
+﻿using ConfigtEditor.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ScriptEditor.Controls
+namespace ConfigtEditor.Controls
 {
     public partial class ListControl<TElement> : ECSGridUserControl<TElement>
     {

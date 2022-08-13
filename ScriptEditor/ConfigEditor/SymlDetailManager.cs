@@ -1,11 +1,11 @@
-﻿using ScriptEditor.Managers;
+﻿using ConfigtEditor.Managers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScriptEditor.ConfigEditor
+namespace ConfigtEditor.ConfigEditor
 {
     public class SymlDetailManager : FixedListManager<SymlContentItem>
     {

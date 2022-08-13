@@ -1,8 +1,8 @@
 ﻿using System;
 using DevExpress.Utils.Menu;
-using ScriptEditor.Interfaces;
+using ConfigtEditor.Interfaces;
 
-namespace ScriptEditor.Controls
+namespace ConfigtEditor.Controls
 {
     /// <summary>
     /// Sets the caption of a menu item and binds a command to it

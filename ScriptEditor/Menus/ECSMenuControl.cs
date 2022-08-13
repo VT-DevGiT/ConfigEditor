@@ -4,7 +4,7 @@ using System.Linq;
 using DevExpress.XtraNavBar;
 
 
-namespace ScriptEditor.Menus
+namespace ConfigtEditor.Menus
 {
     /// <summary>
     /// Control to manage the menu that appears on the left side of the application

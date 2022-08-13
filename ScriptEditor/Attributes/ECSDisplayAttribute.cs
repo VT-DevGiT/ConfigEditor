@@ -2,7 +2,7 @@
 using System.ComponentModel;
 
 
-namespace ScriptEditor.Attributes
+namespace ConfigtEditor.Attributes
 {
     [AttributeUsage(AttributeTargets.Struct | AttributeTargets.Class | AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
     public class ECSDisplayAttribute : DisplayNameAttribute

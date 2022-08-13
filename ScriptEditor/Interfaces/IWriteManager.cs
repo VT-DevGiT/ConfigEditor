@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScriptEditor.Interfaces
+namespace ConfigtEditor.Interfaces
 {
     public interface IWriteManager
     {

@@ -6,9 +6,9 @@ using DevExpress.Utils;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
-using ScriptEditor.Interfaces;
+using ConfigtEditor.Interfaces;
 
-namespace ScriptEditor.Controls
+namespace ConfigtEditor.Controls
 {
     public abstract class ECSGridUserControl<T> : ECSGridUserControl
     {

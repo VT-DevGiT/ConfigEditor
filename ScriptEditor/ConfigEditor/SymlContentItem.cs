@@ -1,12 +1,12 @@
-﻿using ScriptEditor.Attributes;
-using ScriptEditor.Elements;
+﻿using ConfigtEditor.Attributes;
+using ConfigtEditor.Elements;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScriptEditor.ConfigEditor
+namespace ConfigtEditor.ConfigEditor
 {
     public class SymlContentItem : BaseUintElement
     {
@@ -16,6 +16,7 @@ namespace ScriptEditor.ConfigEditor
             NextId++;
             return NextId - 1;
         }
+        
         private uint howManyIndent(string s)
         {
             string cp = s;
@@ -49,6 +50,7 @@ namespace ScriptEditor.ConfigEditor
         public SymlContentItem()
         {
             this.Id = GetId();
+            ParentListName = "";
         }
 
         private List<SymlContentItem> structureList = new List<SymlContentItem>();
@@ -62,44 +64,15 @@ namespace ScriptEditor.ConfigEditor
         public string Name { get; set; }
         [ECSDisplayColumn("Value", 2, 20)]
         public string Value { get; set; }
-
-        // [ECSDisplayColumn("Id", 3, 10)]
         public uint Reference => Id;
-
-
-        // [ECSDisplayColumn("indent", 3, 10)]
+        public string ParentListName { get; set; }
         public uint Indent { get; set; }
-        //[ECSDisplayColumn("List", 3, 10)]
         public bool IsList { get; set; }
-        //[ECSDisplayColumn("List Item", 3, 10)]
         public bool IsListItem { get; set; }
-        //[ECSDisplayColumn("First List Item", 3, 10)]
         public bool IsFirstListItem { get; set; }
-        //[ECSDisplayColumn("Last List Item", 3, 10)]
         public bool IsLastListItem { get; set; }
-        //[ECSDisplayColumn("Bool Value", 3, 10)]
         public bool BoolValue { get; set; }
-
-        //[ECSDisplayColumn("Action", 3, 10)]
         public string Action { get; set; }
-
-        public static List<string> ValideBool = new List<string>()
-        {
-            "","true","false"
-        };
-
-        public static List<string> ValideRooms = new List<string>()
-        {
-            "Root_*&*Outside Cams","A","C","D","E"
-        };
-        public bool IsRoomEdit
-        {
-            get
-            {
-                return Name.Trim().ToLower() == "room:";
-                //return ValideRooms.Contains(Value);
-            }
-        }
 
         public Completor GetCompletor
         {
@@ -121,6 +94,7 @@ namespace ScriptEditor.ConfigEditor
         public SymlContentItem Copy()
         {
             var elem = new SymlContentItem();
+            elem.ParentListName = ParentListName;
             elem.Name = Name;
             elem.Indent = Indent;
             elem.IsListItem = IsListItem;

@@ -8,9 +8,9 @@ using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
-using ScriptEditor.ConfigEditor;
+using ConfigtEditor.ConfigEditor;
 
-namespace ScriptEditor.Elements
+namespace ConfigtEditor.Elements
 {
     [Serializable]
     [XmlRoot("CONFIG")]
@@ -63,8 +63,8 @@ namespace ScriptEditor.Elements
             completorBool.Id = GetCompletorId();
             completorBool.Name = "Bool";
             Singleton.Completors.Add(completorBool);
-            completorBool.ListValues.Add(new CompletorValue("true"));
-            completorBool.ListValues.Add(new CompletorValue("false"));
+            completorBool.ListValues.Add(new CompletorValue("true","Vraie"));
+            completorBool.ListValues.Add(new CompletorValue("false","Faux"));
             completorBool.CompletorType = CompletorType.ByValue;
             
 
@@ -72,9 +72,9 @@ namespace ScriptEditor.Elements
             completorRoom.Id = GetCompletorId();
             completorRoom.Name = "Room";
             Singleton.Completors.Add(completorRoom);
-            completorRoom.ListValues.Add(new CompletorValue("LCZ_Toilets"));
-            completorRoom.ListValues.Add(new CompletorValue("LCZ_Cafe (15)"));
-            completorRoom.ListValues.Add(new CompletorValue("HCZ_EZ_Checkpoint"));
+            completorRoom.ListValues.Add(new CompletorValue("LCZ_Toilets","115"));
+            completorRoom.ListValues.Add(new CompletorValue("LCZ_Cafe (15)","15"));
+            completorRoom.ListValues.Add(new CompletorValue("HCZ_EZ_Checkpoint","12"));
             completorRoom.ContainWord = "room";
             completorRoom.CompletorType = CompletorType.ByName;
             

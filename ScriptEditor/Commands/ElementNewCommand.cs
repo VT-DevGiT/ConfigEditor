@@ -1,11 +1,11 @@
-﻿using ScriptEditor.Controls;
-using ScriptEditor.Factory;
-using ScriptEditor.Interfaces;
-using ScriptEditor.Utils;
+﻿using ConfigtEditor.Controls;
+using ConfigtEditor.Factory;
+using ConfigtEditor.Interfaces;
+using ConfigtEditor.Utils;
 using System;
 using System.Windows.Forms;
 
-namespace ScriptEditor.Commands
+namespace ConfigtEditor.Commands
 {
     public class ElementNewCommand<T> : BaseCommand
         where T : new()

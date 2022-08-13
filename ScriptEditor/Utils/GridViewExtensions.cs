@@ -10,7 +10,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScriptEditor.Utils
+namespace ConfigtEditor.Utils
 {
     public static class GridViewExtensions
     {

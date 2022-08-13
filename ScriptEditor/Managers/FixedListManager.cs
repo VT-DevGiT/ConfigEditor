@@ -1,10 +1,10 @@
-﻿using ScriptEditor.Elements;
-using ScriptEditor.Interfaces;
+﻿using ConfigtEditor.Elements;
+using ConfigtEditor.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ScriptEditor.Managers
+namespace ConfigtEditor.Managers
 
 {
     public class FixedListManager<T> : IListManager<T>

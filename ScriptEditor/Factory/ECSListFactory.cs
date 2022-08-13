@@ -4,14 +4,14 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using DevExpress.Utils;
-using ScriptEditor.Commands;
-using ScriptEditor.ConfigEditor;
-using ScriptEditor.Controls;
-using ScriptEditor.CustomClass;
-using ScriptEditor.Elements;
-using ScriptEditor.Utils;
+using ConfigtEditor.Commands;
+using ConfigtEditor.ConfigEditor;
+using ConfigtEditor.Controls;
+using ConfigtEditor.CustomClass;
+using ConfigtEditor.Elements;
+using ConfigtEditor.Utils;
 
-namespace ScriptEditor.Factory
+namespace ConfigtEditor.Factory
 {
     public sealed class ECSListFactorySingleton : ECSListFactory
     {

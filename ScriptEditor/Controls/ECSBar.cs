@@ -1,7 +1,7 @@
 ﻿using DevExpress.XtraBars;
 
 
-namespace ScriptEditor.Controls
+namespace ConfigtEditor.Controls
 {
     public class ECSBar : Bar
     {

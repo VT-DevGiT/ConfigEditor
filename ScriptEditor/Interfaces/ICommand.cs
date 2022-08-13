@@ -1,7 +1,7 @@
 ﻿using System;
 using IWinCommand = System.Windows.Input.ICommand;
 
-namespace ScriptEditor.Interfaces
+namespace ConfigtEditor.Interfaces
 {
     public interface ICommand<T> : ICommand
     {

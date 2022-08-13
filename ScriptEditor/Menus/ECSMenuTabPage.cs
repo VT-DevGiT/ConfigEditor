@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using DevExpress.XtraTab;
 
 
-namespace ScriptEditor.Menus
+namespace ConfigtEditor.Menus
 {
     public class ECSMenuTabPage : XtraTabPage
     {

@@ -1,13 +1,13 @@
-﻿using ScriptEditor.ConfigEditor;
-using ScriptEditor.Controls;
-using ScriptEditor.CustomClass;
-using ScriptEditor.Elements;
-using ScriptEditor.Interfaces;
-using ScriptEditor.Utils;
+﻿using ConfigtEditor.ConfigEditor;
+using ConfigtEditor.Controls;
+using ConfigtEditor.CustomClass;
+using ConfigtEditor.Elements;
+using ConfigtEditor.Interfaces;
+using ConfigtEditor.Utils;
 
 
 
-namespace ScriptEditor.Factory
+namespace ConfigtEditor.Factory
 {
     public static class ECSDetailFactory
     {

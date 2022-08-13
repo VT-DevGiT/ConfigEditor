@@ -1,4 +1,4 @@
-﻿namespace ScriptEditor.Menus
+﻿namespace ConfigtEditor.Menus
 {
     partial class MasterMenuControl
     {

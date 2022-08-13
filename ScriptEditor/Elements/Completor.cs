@@ -1,5 +1,5 @@
-﻿using ScriptEditor.Attributes;
-using ScriptEditor.ConfigEditor;
+﻿using ConfigtEditor.Attributes;
+using ConfigtEditor.ConfigEditor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace ScriptEditor.Elements
+namespace ConfigtEditor.Elements
 {
     [Serializable]
     [XmlRoot("Completor")]
@@ -56,6 +56,11 @@ namespace ScriptEditor.Elements
             else if (CompletorType == CompletorType.ByNameAndValue)
             {
                 return synapseItem.Name.ToLower().Contains(ContainWord.ToLower()) && ListValues.Any(p => p.Value != null && p.Value.Contains(synapseItem.Value));
+            }
+            else if (CompletorType == CompletorType.ByIsListContaing)
+            {
+                return synapseItem.ParentListName.ToLower().Contains(ContainWord.ToLower());
+
             }
             return false;
         }

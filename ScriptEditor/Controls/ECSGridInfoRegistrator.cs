@@ -3,7 +3,7 @@ using DevExpress.XtraGrid.Registrator;
 using DevExpress.XtraGrid.Views.Base;
 
 
-namespace ScriptEditor.Controls
+namespace ConfigtEditor.Controls
 {
     public class ECSGridInfoRegistrator : GridInfoRegistrator
     {

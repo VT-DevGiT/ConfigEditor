@@ -8,15 +8,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
-using ScriptEditor.Controls;
-using ScriptEditor.Utils;
-using ScriptEditor.Managers;
+using ConfigtEditor.Controls;
+using ConfigtEditor.Utils;
+using ConfigtEditor.Managers;
 using DevExpress.XtraGrid.Columns;
-using ScriptEditor.Commands;
-using ScriptEditor.ConfigEditor;
-using ScriptEditor.Elements;
+using ConfigtEditor.Commands;
+using ConfigtEditor.ConfigEditor;
+using ConfigtEditor.Elements;
 
-namespace ScriptEditor.CustomClass
+namespace ConfigtEditor.CustomClass
 {
     public partial class ConfigUC : ECSUserControl
     {

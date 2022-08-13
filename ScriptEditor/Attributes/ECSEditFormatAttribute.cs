@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ScriptEditor.Attributes
+namespace ConfigtEditor.Attributes
 {
     public enum ECSMaskType
     {

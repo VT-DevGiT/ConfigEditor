@@ -1,5 +1,5 @@
-﻿using ScriptEditor.Attributes;
-using ScriptEditor.Elements;
+﻿using ConfigtEditor.Attributes;
+using ConfigtEditor.Elements;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ using System.Xml.Serialization;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace ScriptEditor.CustomClass
+namespace ConfigtEditor.CustomClass
 {
     [Serializable]
     [XmlRoot("CustomClass")]

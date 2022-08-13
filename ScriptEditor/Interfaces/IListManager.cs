@@ -1,11 +1,11 @@
-﻿using ScriptEditor.Elements;
+﻿using ConfigtEditor.Elements;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScriptEditor.Interfaces
+namespace ConfigtEditor.Interfaces
 {
     public interface IListManager<T> : IListManager
     {

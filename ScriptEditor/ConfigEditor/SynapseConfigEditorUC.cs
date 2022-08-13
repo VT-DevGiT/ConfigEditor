@@ -8,17 +8,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
-using ScriptEditor.Controls;
-using ScriptEditor.Utils;
-using ScriptEditor.Managers;
+using ConfigtEditor.Controls;
+using ConfigtEditor.Utils;
+using ConfigtEditor.Managers;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraEditors.Controls;
-using ScriptEditor.Commands;
-using ScriptEditor.Interfaces;
+using ConfigtEditor.Commands;
+using ConfigtEditor.Interfaces;
 
-namespace ScriptEditor.ConfigEditor
+namespace ConfigtEditor.ConfigEditor
 {
     public partial class SynapseConfigEditorUC : ECSBarUserControl, IMultipleDisplay
     {
@@ -127,21 +127,8 @@ namespace ScriptEditor.ConfigEditor
         private void CustomRowCellEdit(object sender, CustomRowCellEditEventArgs e)
         {
             var item = _listDetail.GridView.GetRow(e.RowHandle) as SymlContentItem;
-            if (item != null && e.Column.FieldName == nameof(SymlContentItem.Value))
+            if (item != null && e.Column.FieldName == nameof(SymlContentItem.Value) && !item.IsList)
             {
-                /*
-                if (item.BoolValue)
-                {
-                    RepositoryItemComboBox comb = new RepositoryItemComboBox();
-                    SymlContentItem.ValideBool.ForEach(p => comb.Items.Add(p));
-                    e.RepositoryItem = comb;
-                }
-                else if (item.IsRoomEdit)
-                {
-                    RepositoryItemComboBox comb = new RepositoryItemComboBox();
-                    Program.Config.ValideRooms.ForEach(p => comb.Items.Add(p));
-                    e.RepositoryItem = comb;
-                }*/
                 if (item.GetCompletor != null)
                 {
                     var completor = item.GetCompletor;
@@ -153,27 +140,10 @@ namespace ScriptEditor.ConfigEditor
                 {
                     var btn = new RepositoryItemTextEdit();
                     btn.ValidateOnEnterKey = true;
-                    e.RepositoryItem = btn;// new RepositoryItemTextEdit();
+                    e.RepositoryItem = btn;
                 }
             }
-            else if (item != null && e.Column.FieldName == nameof(SymlContentItem.Action))
-            {
-                if (item.IsRoomEdit)
-                {
-                    e.RepositoryItem = null;
-                    /*
-                        var editor = new RepositoryItemButtonEdit();
-                        editor.TextEditStyle = TextEditStyles.HideTextEditor;
-                        editor.Buttons[0].Kind = DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph;
-                        editor.Buttons[0].BindCommand(new ActionCommand(() => Program.Config.AddRoom(item)));
-                        e.RepositoryItem = editor;
-                    */
-                }
-                else
-                    e.RepositoryItem = null;
-            }
-
-        }
+         }
         #endregion
 
     }

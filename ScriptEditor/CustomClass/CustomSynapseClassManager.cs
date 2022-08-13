@@ -1,14 +1,14 @@
-﻿using ScriptEditor.Elements;
-using ScriptEditor.Interfaces;
-using ScriptEditor.Managers;
-using ScriptEditor.Utils;
+﻿using ConfigtEditor.Elements;
+using ConfigtEditor.Interfaces;
+using ConfigtEditor.Managers;
+using ConfigtEditor.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScriptEditor.CustomClass
+namespace ConfigtEditor.CustomClass
 {
     public class CustomSynapseClassManager : FixedListManager<CustomSynapseClass>, IWriteManager
     {
