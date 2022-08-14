@@ -34,7 +34,7 @@ namespace ConfigtEditor.ConfigEditor
             File.WriteAllText(_path, text);
         }
 
-        private static Dictionary<string, ConfigSection> ParseString(string str)
+        public static Dictionary<string, ConfigSection> ParseString(string str)
         {
             var sections = new Dictionary<string, ConfigSection>();
             var split = str.Split(new string[] { "[", "]" }, StringSplitOptions.None);
@@ -75,7 +75,7 @@ namespace ConfigtEditor.ConfigEditor
             return sections;
         }
 
-        private static string WriteSections(Dictionary<string, ConfigSection> sections)
+        public static string WriteSections(Dictionary<string, ConfigSection> sections)
         {
             string s = "";
             foreach (var value in sections.Values)

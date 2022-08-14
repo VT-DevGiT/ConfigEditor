@@ -76,6 +76,13 @@ namespace ConfigtEditor.Factory
                 return ctrl;
             });
 
+            Register<SynapsePermissionEditor>(() =>
+            {
+                var ctrl = new SynapseConfigEditorUC(true);
+                return ctrl;
+            });
+
+
             Register<DebugArme>(() =>
             {
                 var ctrl = new ECSUserControl();

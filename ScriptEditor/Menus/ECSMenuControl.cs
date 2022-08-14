@@ -50,6 +50,10 @@ namespace ConfigtEditor.Menus
         {
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
+            // 
+            // ECSMenuControl
+            // 
+            this.OptionsNavPane.ExpandedWidth = 140;
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
 

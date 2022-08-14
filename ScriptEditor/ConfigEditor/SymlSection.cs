@@ -79,10 +79,34 @@ namespace ConfigtEditor.ConfigEditor
                 ContentList.Add(item);
             }
             // Add the structure item to the List entry
+            for (int i = 0; i < ContentList.Count; i++)
+            {
+                SymlContentItem elem = ContentList[i];
+                if (elem.Name.StartsWith("#"))
+                {
+                    elem.IsComment = true;
+                    for (int j = i+1; j < ContentList.Count && elem.IsComment;j++)
+                    {
+                        elem = ContentList[j];
+                        elem.IsComment = !elem.Name.Contains(":");
+                    }
+                }
+            }
+            // Add the Comment item 
+            for (int i = 0; i < ContentList.Count; i++)
+            {
+                SymlContentItem elem = ContentList[i];
+                if (!elem.IsComment)
+                { 
+                    elem.ParentComment = GetComment(i - 1);
+                }
+            }
+
             var list = ContentList.Where(p => !p.IsListItem && ContentList.Any(p2 => p2.Id == p.Id + 1 && p2.IsListItem));
             foreach (SymlContentItem elem in list)
             {
                 int idx = ContentList.IndexOf(elem);
+
                 // Mark as a list
                 elem.IsList = true;
                 idx++;
@@ -91,6 +115,7 @@ namespace ConfigtEditor.ConfigEditor
                 {
                     var subItem = ContentList[idx];
                     subItem.ParentListName = elem.Name;
+                    subItem.ParentComment = elem.ParentComment;
                     idx++;
                 }
                 idx = ContentList.IndexOf(elem);
@@ -108,7 +133,17 @@ namespace ConfigtEditor.ConfigEditor
             // Add Parent list name
 
         }
+        private string GetComment(int idx)
+        {
+            string result = "";
+            while (idx > 0 && ContentList[idx].IsComment)
+            {
+                result = ContentList[idx].Name + result;
+                idx--;
+            }
 
+            return result;
+        }
         private string Join(string[] splt, string v)
         {
             if (splt.Length > 1)

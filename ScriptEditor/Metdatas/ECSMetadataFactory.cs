@@ -92,7 +92,7 @@ namespace ConfigtEditor.Metadatas
             Register<SynapseConfigEditor>("Config Editor", "ICN_CUSTOM_CLASS");
             Register<Config>("Config Editor Parameter", "ICN_CUSTOM_CLASS");
             Register<DebugArme>("Arme", "ICN_CUSTOM_CLASS");
-
+            Register<SynapsePermissionEditor>("Permission Editor", "ICN_CUSTOM_CLASS");
         }
 
         #endregion

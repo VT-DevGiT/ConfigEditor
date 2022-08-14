@@ -65,7 +65,10 @@ namespace ConfigtEditor.ConfigEditor
         [ECSDisplayColumn("Value", 2, 20)]
         public string Value { get; set; }
         public uint Reference => Id;
+        [ECSDisplayColumn("Parent Name", 1, 40)]
         public string ParentListName { get; set; }
+        [ECSDisplayColumn("Parent Comment", 1, 40)]
+        public string ParentComment { get; set; }
         public uint Indent { get; set; }
         public bool IsList { get; set; }
         public bool IsListItem { get; set; }
@@ -73,7 +76,8 @@ namespace ConfigtEditor.ConfigEditor
         public bool IsLastListItem { get; set; }
         public bool BoolValue { get; set; }
         public string Action { get; set; }
-
+        [ECSDisplayColumn("IsComment", 1, 40)]
+        public bool IsComment { get; set; }
         public Completor GetCompletor
         {
             get

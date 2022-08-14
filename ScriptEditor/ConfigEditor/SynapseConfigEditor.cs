@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace ConfigtEditor.ConfigEditor
 {
-    class SynapseConfigEditor
+    internal class SynapseConfigEditor
     {
 
+    }
+
+    internal class SynapsePermissionEditor
+    {
     }
 }

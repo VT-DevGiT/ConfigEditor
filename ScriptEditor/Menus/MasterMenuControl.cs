@@ -44,6 +44,7 @@ namespace ConfigtEditor.Menus
             var menuSynapse = new ECSMenuControl("Synapse");
             ECSMenuGroup grpClass = (ECSMenuGroup)menuSynapse.Groups.Add(new ECSMenuGroup("Classe"));
             grpClass.AddItem<SynapseConfigEditor>();
+            grpClass.AddItem<SynapsePermissionEditor>();
             grpClass.AddItem<Config>();
             //grpClass.AddItem<CustomSynapseClass>();
 

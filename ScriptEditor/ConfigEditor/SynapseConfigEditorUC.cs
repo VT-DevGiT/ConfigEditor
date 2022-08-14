@@ -22,6 +22,35 @@ namespace ConfigtEditor.ConfigEditor
 {
     public partial class SynapseConfigEditorUC : ECSBarUserControl, IMultipleDisplay
     {
+        #region Nested
+        private class AddSectionCommand : BaseCommand
+        {
+            #region Attributes & Properties
+            protected override bool CanExecuteValue => true;
+            private SymlSectionManager _manager;
+
+
+            #endregion
+
+            #region Constructors & Destructor
+            public AddSectionCommand(SymlSectionManager manager)
+            {
+                _manager = manager;
+            }
+
+            #endregion
+
+            #region Methods
+            protected override void ExecuteCommand()
+            {
+                string name = XtraInputBox.Show("Group name", "Section Name", "Default");
+
+                _manager.CreateSection(name);
+            }
+            #endregion
+
+        }
+        #endregion
         private static int NextHash = 0;
         private int hash = -1;
         public override int GetHashCode()
@@ -41,13 +70,22 @@ namespace ConfigtEditor.ConfigEditor
         private SymlDetailManager _managerDetail = new SymlDetailManager();
         private ListControl<SymlSection> _listSection;
         private ListControl<SymlContentItem> _listDetail;
-        public SynapseConfigEditorUC()
+        public SynapseConfigEditorUC(bool permission = false)
         {
             InitializeComponent();
             InitListControl();
             InitCommands();
+            if (permission)
+            {
+                AddPermissionCommand();
+            }
         }
 
+        private void AddPermissionCommand()
+        {
+            var addSectionCommand = new AddSectionCommand(_managerSection);
+            _listSection.Register("Add", addSectionCommand, "Add Section", true, true);
+        }
         private void InitListControl()
         {
             _listDetail = new ListControl<SymlContentItem>(_managerDetail);
@@ -127,7 +165,7 @@ namespace ConfigtEditor.ConfigEditor
         private void CustomRowCellEdit(object sender, CustomRowCellEditEventArgs e)
         {
             var item = _listDetail.GridView.GetRow(e.RowHandle) as SymlContentItem;
-            if (item != null && e.Column.FieldName == nameof(SymlContentItem.Value) && !item.IsList)
+            if (item != null && e.Column.FieldName == nameof(SymlContentItem.Value) && !item.IsList && !item.IsComment)
             {
                 if (item.GetCompletor != null)
                 {
