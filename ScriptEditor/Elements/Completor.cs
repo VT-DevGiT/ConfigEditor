@@ -18,6 +18,7 @@ namespace ConfigtEditor.Elements
         [XmlElement("Name")]
         public string Name {get;set;}
         private List<CompletorValue> _listValues = new List<CompletorValue>();
+        
         [XmlArray("Values")]
         [XmlArrayItem("Value")]
         public List<CompletorValue> ListValues => _listValues;
@@ -29,6 +30,10 @@ namespace ConfigtEditor.Elements
         [XmlElement("Contain")]
         [ECSDisplayColumn("Contain", 1, 12)]
         public string ContainWord { get; set; }
+
+        [XmlElement("CaseSensitive")]
+        [ECSDisplayColumn("Case Sensitive", 1, 7)]
+        public bool CaseSensitive { get; set; }
         #endregion
 
         #region Constructors & Destructor
@@ -39,30 +44,34 @@ namespace ConfigtEditor.Elements
         public bool IsItemCompletor(SymlContentItem synapseItem)
         {
             // Safe design
-            if (synapseItem == null) return false;
+            if (synapseItem == null || synapseItem.Value == null) return false;
 
             if (CompletorType == CompletorType.ByValue)
             {
-                return ListValues.Any(p=> p.Value != null && p.Value== synapseItem.Value);
+                return ListValues.Any(p=> p.Value != null && p.Value == synapseItem.Value);
             }
             else if (CompletorType == CompletorType.ByName)
             {
-                return synapseItem.Name.ToLower().Contains(ContainWord.ToLower());
+                return CeckSensitiveInsensitive(synapseItem.Name);
             }
             else if (CompletorType == CompletorType.ByNameOrValue)
             {
-                return synapseItem.Name.ToLower().Contains(ContainWord.ToLower()) || ListValues.Any( p=> p.Value != null && p.Value.Contains(synapseItem.Value));
+                return CeckSensitiveInsensitive(synapseItem.Name) || ListValues.Any(p => p.Value != null && p.Value.Contains(synapseItem.Value));
             }
             else if (CompletorType == CompletorType.ByNameAndValue)
             {
-                return synapseItem.Name.ToLower().Contains(ContainWord.ToLower()) && ListValues.Any(p => p.Value != null && p.Value.Contains(synapseItem.Value));
+                return CeckSensitiveInsensitive(synapseItem.Name) && ListValues.Any(p => p.Value != null && p.Value.Contains(synapseItem.Value));
             }
             else if (CompletorType == CompletorType.ByIsListContaing)
             {
-                return synapseItem.ParentListName.ToLower().Contains(ContainWord.ToLower());
-
+                return CeckSensitiveInsensitive(synapseItem.ParentListName);
             }
             return false;
+        }
+
+        private bool CeckSensitiveInsensitive(string name)
+        {
+            return CaseSensitive ? name.Contains(ContainWord) : name.ToLower().Contains(ContainWord.ToLower());
         }
         #endregion
 

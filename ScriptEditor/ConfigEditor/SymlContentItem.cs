@@ -39,7 +39,6 @@ namespace ConfigtEditor.ConfigEditor
 
         public SymlContentItem(string name, string value) : this(name)
         {
-            BoolValue = (value == "true" || value == "false");
             this.Value = value;
         }
         public SymlContentItem(string name) : this()
@@ -74,7 +73,6 @@ namespace ConfigtEditor.ConfigEditor
         public bool IsListItem { get; set; }
         public bool IsFirstListItem { get; set; }
         public bool IsLastListItem { get; set; }
-        public bool BoolValue { get; set; }
         public string Action { get; set; }
         [ECSDisplayColumn("IsComment", 1, 40)]
         public bool IsComment { get; set; }
@@ -104,7 +102,6 @@ namespace ConfigtEditor.ConfigEditor
             elem.IsListItem = IsListItem;
             elem.IsFirstListItem = IsFirstListItem;
             elem.IsLastListItem = IsLastListItem;
-            elem.BoolValue = BoolValue;
             return elem;
         }
     }

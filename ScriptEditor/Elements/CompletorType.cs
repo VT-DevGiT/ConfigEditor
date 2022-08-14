@@ -20,15 +20,13 @@ namespace ConfigtEditor.Elements
 
         [XmlElement("Name")]
         public string Name { get; set; }
-        [XmlElement("CaseSensitive")]
-        public bool CaseSensitive { get; set; }
+        
+
         #endregion
 
         #region Constructors & Destructor
         public CompletorType()
         {
-            CaseSensitive = true;
-
         }
         public CompletorType(uint id, string name) : this()
         {
