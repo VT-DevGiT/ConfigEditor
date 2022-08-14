@@ -64,17 +64,18 @@ namespace ConfigtEditor.ConfigEditor
         [ECSDisplayColumn("Value", 2, 20)]
         public string Value { get; set; }
         public uint Reference => Id;
-        [ECSDisplayColumn("Parent Name", 1, 40)]
+        //[ECSDisplayColumn("Parent Name", 10, 40)]
         public string ParentListName { get; set; }
-        [ECSDisplayColumn("Parent Comment", 1, 40)]
+        //[ECSDisplayColumn("Parent Comment", 10, 40)]
         public string ParentComment { get; set; }
         public uint Indent { get; set; }
+        //[ECSDisplayColumn("Is List", 10, 40)]
         public bool IsList { get; set; }
         public bool IsListItem { get; set; }
         public bool IsFirstListItem { get; set; }
         public bool IsLastListItem { get; set; }
         public string Action { get; set; }
-        [ECSDisplayColumn("IsComment", 1, 40)]
+        //[ECSDisplayColumn("IsComment", 10, 40)]
         public bool IsComment { get; set; }
         public Completor GetCompletor
         {

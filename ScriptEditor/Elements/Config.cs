@@ -72,8 +72,8 @@ namespace ConfigtEditor.Elements
             var completorItem = new Completor();
             completorItem.Id = GetCompletorId();
             completorItem.Name = "Items";
-            completorItem.ContainWord = "Item";
-            completorItem.CompletorType = CompletorType.ByIsListContaing;
+            completorItem.ContainWord = "Item&Id";
+            completorItem.CompletorType = CompletorType.ByName;
             Singleton.Completors.Add(completorItem);
             AddItemsToCompletor(completorItem);
             Singleton.Save();
@@ -82,8 +82,9 @@ namespace ConfigtEditor.Elements
             var completorScp = new Completor();
             completorScp.Id = GetCompletorId();
             completorScp.Name = "Scps";
-            completorScp.ContainWord = "Scp";
-            completorScp.CompletorType = CompletorType.ByIsListContaing;
+            completorScp.ContainWord = "Scp&Id";
+            completorScp.CaseSensitive = false;
+            completorScp.CompletorType = CompletorType.ByName;
             Singleton.Completors.Add(completorScp);
             AddScpToCompletor(completorScp);
             Singleton.Save();
@@ -92,8 +93,9 @@ namespace ConfigtEditor.Elements
             var completorRole = new Completor();
             completorRole.Id = GetCompletorId();
             completorRole.Name = "Roles";
-            completorRole.ContainWord = "Role";
-            completorRole.CompletorType = CompletorType.ByIsListContaing;
+            completorRole.ContainWord = "Role&Id|All&roles";
+            completorRole.CaseSensitive = false;
+            completorRole.CompletorType = CompletorType.ByName;
             Singleton.Completors.Add(completorRole);
             AddRolesToCompletor(completorRole);
             Singleton.Save();
@@ -103,7 +105,7 @@ namespace ConfigtEditor.Elements
             completorTeam.Id = GetCompletorId();
             completorTeam.Name = "Teams";
             completorTeam.ContainWord = "Team";
-            completorTeam.CompletorType = CompletorType.ByNameOrValue;
+            completorTeam.CompletorType = CompletorType.ByName;
             Singleton.Completors.Add(completorTeam);
             AddTeamsToCompletor(completorTeam);
             Singleton.Save();

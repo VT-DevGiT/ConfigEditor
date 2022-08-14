@@ -17,6 +17,7 @@ using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraEditors.Controls;
 using ConfigtEditor.Commands;
 using ConfigtEditor.Interfaces;
+using ConfigtEditor.Elements;
 
 namespace ConfigtEditor.ConfigEditor
 {
@@ -79,6 +80,7 @@ namespace ConfigtEditor.ConfigEditor
             {
                 AddPermissionCommand();
             }
+
         }
 
         private void AddPermissionCommand()
@@ -145,7 +147,6 @@ namespace ConfigtEditor.ConfigEditor
                 _managerDetail.LoadContent(item);
             }
         }
-
         #region Events
         private void CustomShowEditor(object sender, CancelEventArgs e)
         {
@@ -154,7 +155,7 @@ namespace ConfigtEditor.ConfigEditor
             switch (_listDetail.GridView.FocusedColumn.FieldName)
             {
                 case nameof(SymlContentItem.Value):
-                    e.Cancel = false;
+                    e.Cancel = line.IsList || line.IsComment;
                     break;
                 case nameof(SymlContentItem.Action):
                     e.Cancel = line.GetCompletor == null;
@@ -168,9 +169,9 @@ namespace ConfigtEditor.ConfigEditor
             var item = _listDetail.GridView.GetRow(e.RowHandle) as SymlContentItem;
             if (item != null && e.Column.FieldName == nameof(SymlContentItem.Value) && !item.IsList && !item.IsComment)
             {
-                if (item.GetCompletor != null)
+                var completor = item.GetCompletor;
+                if (completor != null)
                 {
-                    var completor = item.GetCompletor;
                     RepositoryItemComboBox comb = new RepositoryItemComboBox();
                     completor.ListValues.ForEach(p => comb.Items.Add(p));
                     e.RepositoryItem = comb;

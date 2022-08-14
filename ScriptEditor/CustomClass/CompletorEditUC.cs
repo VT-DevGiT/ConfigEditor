@@ -30,10 +30,6 @@ namespace ConfigtEditor.CustomClass
             _manager = manager as CompletorManager;
             cbType.Properties.Items.Add(CompletorType.ByName);
             cbType.Properties.Items.Add(CompletorType.ByValue);
-            cbType.Properties.Items.Add(CompletorType.ByNameOrValue);
-            cbType.Properties.Items.Add(CompletorType.ByNameAndValue);
-
-            cbType.Properties.Items.Add(CompletorType.ByIsListContaing);
         }
     }
 }

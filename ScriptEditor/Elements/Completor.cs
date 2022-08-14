@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
@@ -52,26 +53,46 @@ namespace ConfigtEditor.Elements
             }
             else if (CompletorType == CompletorType.ByName)
             {
-                return CeckSensitiveInsensitive(synapseItem.Name);
+                string info = $"{synapseItem.Name} {synapseItem.ParentListName} {synapseItem.ParentComment}";
+                return CheckContains(info);
             }
-            else if (CompletorType == CompletorType.ByNameOrValue)
-            {
-                return CeckSensitiveInsensitive(synapseItem.Name) || ListValues.Any(p => p.Value != null && p.Value.Contains(synapseItem.Value));
-            }
-            else if (CompletorType == CompletorType.ByNameAndValue)
-            {
-                return CeckSensitiveInsensitive(synapseItem.Name) && ListValues.Any(p => p.Value != null && p.Value.Contains(synapseItem.Value));
-            }
-            else if (CompletorType == CompletorType.ByIsListContaing)
-            {
-                return CeckSensitiveInsensitive(synapseItem.ParentListName);
-            }
+ 
             return false;
         }
 
-        private bool CeckSensitiveInsensitive(string name)
+        private bool CheckContains(string value)
         {
-            return CaseSensitive ? name.Contains(ContainWord) : name.ToLower().Contains(ContainWord.ToLower());
+            if (String.IsNullOrWhiteSpace(ContainWord))
+            {
+                return false;
+            }
+            var allOrWord = ContainWord.Split('|');
+            bool result = false;
+            int i = 0;
+            while (!result && i < allOrWord.Count())
+            {
+                result = CheckAndWord(value, allOrWord[i]);
+                i++;
+            }
+
+            return result;// CaseSensitive ? value.Contains(word) : value.ToLower().Contains(word.ToLower());
+        }
+
+        private bool CheckAndWord(string value, string word)
+        {
+            var allWord = word.Split('&');
+            bool result = true;
+            int i = 0;
+            while (result && i < allWord.Count())
+            {
+                result = CeckSensitiveInsensitive(value, allWord[i]);
+                i++;
+            }
+            return result;
+        }
+        private bool CeckSensitiveInsensitive(string value, string word)
+        {
+            return CaseSensitive ? value.Contains(word) : value.ToLower().Contains(word.ToLower());
         }
         #endregion
 
