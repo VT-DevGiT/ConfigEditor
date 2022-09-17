@@ -27,7 +27,7 @@ namespace ConfigtEditor.ConfigEditor
             Syml.Store();
         }
 
-        private readonly string emptySection = @"[/NAME/]
+        private const string emptyPermissionSection = @"[/NAME/]
 {
 # If Enabled this Group will be assigned to all players, which are in no other Group
 default: true
@@ -56,14 +56,14 @@ inheritance:
 # The UserID's of the Players in the Group
 members:
 }";
-        internal void CreateSection(string name)
+        internal void CreateConfigSection(string name)
         {
             if (Syml != null)
             {
                 if (!ElementList.Any(p=>p.Name == name))
                 {
                     var text = SYML.WriteSections(Syml.Sections);
-                    string sectionWithName = emptySection.Replace("/NAME/", name);
+                    string sectionWithName = emptyPermissionSection.Replace("/NAME/", name);
                     text += sectionWithName;
                     Syml.Sections = SYML.ParseString(text);
                     LoadList(Syml.Sections.Keys.ToList().Select(p => new SymlSection(p, Syml.Sections[p].Content)).ToList());

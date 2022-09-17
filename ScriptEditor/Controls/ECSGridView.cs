@@ -247,6 +247,7 @@ namespace ConfigtEditor.Controls
             this.OptionsBehavior.Editable = false;
             this.OptionsView.ShowGroupPanel = false;
             this.OptionsView.ColumnAutoWidth = false;
+            this.OptionsView.RowAutoHeight = true;
             this.OptionsView.ShowAutoFilterRow = false;
             this.OptionsView.EnableAppearanceEvenRow = true;
             this.OptionsView.EnableAppearanceOddRow = true;
@@ -279,7 +280,7 @@ namespace ConfigtEditor.Controls
             // Desactive le hint DevExpress quand la collone est plus petit que le
             // Son titre
             this.OptionsHint.ShowColumnHeaderHints = false;
-        }
+         }
 
         public event EventHandler LayoutResetEvent;
 

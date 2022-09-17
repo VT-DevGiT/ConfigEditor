@@ -30,6 +30,10 @@ namespace ConfigtEditor.ConfigEditor
             string result = "";
             foreach (var item in ContentList)
             {
+                if (item.IsMultiLine)
+                {
+                    item.Value = item.Value.Replace("\r\n", "\n");
+                }
                 if (!String.IsNullOrWhiteSpace(result))
                 {
                     result += "\n";
@@ -42,13 +46,20 @@ namespace ConfigtEditor.ConfigEditor
         {
             ContentList = new List<SymlContentItem>();
             var toParse = content.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.None).ToList();
-            SymlContentItem item;
+            SymlContentItem item = null;
             foreach (var line in toParse)
             {
-                if (line.Contains(": "))
+                if (line.StartsWith("#"))
+                {
+                    item = new SymlContentItem(line);
+                    item.IsComment = true;
+                    AddItemIfNeeded(item);
+                }
+                else if (line.Contains(": "))
                 {
                     var splt = line.Split(new string[] { ": " }, StringSplitOptions.None);
                     item = new SymlContentItem(splt[0] + ": ", Join(splt, ": "));
+                    AddItemIfNeeded(item);
 
                 }
                 else
@@ -57,27 +68,28 @@ namespace ConfigtEditor.ConfigEditor
                     {
                         var splt = line.Split(new string[] { "- " }, StringSplitOptions.None);
                         item = new SymlContentItem(splt[0] + "- ", Join(splt, "- "));
+                        AddItemIfNeeded(item);
                     }
                     else
                     {
-                        item = new SymlContentItem(line);
+                        if (item?.IsComment == true && !String.IsNullOrWhiteSpace(line))
+                        {
+                            item.Name = $"{item.Name}\n{line}";
+                            AddItemIfNeeded(item,false);
+                        }
+                        else if (item?.IsMultiLine == true)//!String.IsNullOrEmpty(item?.Value))
+                        {
+                            item.Value = $"{item.Value}\n{line}";
+                            AddItemIfNeeded(item, false);
+                        }
+                        else {
+                            item = new SymlContentItem(line);
+                            AddItemIfNeeded(item);   
+                        }
                     }
                 }
-                if (ContentList.Any())
-                {
-                    // Check start and end list item
-                    var previous = ContentList.Last();
-                    if ((previous.IsListItem && item.IsListItem) || (previous.IsListItem && previous.Indent != item.Indent))
-                    {
-                        previous.IsLastListItem = true;
-                    }
-                    else if (previous.IsListItem && !item.IsListItem && previous.IsListItem && previous.Indent == item.Indent)
-                    {
-                        item.IsListItem = true;
-                    }
-                }
-                ContentList.Add(item);
             }
+ 
             // Add the structure item to the List entry
             for (int i = 0; i < ContentList.Count; i++)
             {
@@ -85,7 +97,7 @@ namespace ConfigtEditor.ConfigEditor
                 if (elem.Name.StartsWith("#"))
                 {
                     elem.IsComment = true;
-                    for (int j = i+1; j < ContentList.Count && elem.IsComment;j++)
+                    for (int j = i + 1; j < ContentList.Count && elem.IsComment; j++)
                     {
                         elem = ContentList[j];
                         elem.IsComment = !elem.Name.Contains(":");
@@ -97,7 +109,7 @@ namespace ConfigtEditor.ConfigEditor
             {
                 SymlContentItem elem = ContentList[i];
                 if (!elem.IsComment)
-                { 
+                {
                     elem.ParentComment = GetComment(i - 1);
                 }
             }
@@ -133,6 +145,28 @@ namespace ConfigtEditor.ConfigEditor
             // Add Parent list name
 
         }
+
+        private void AddItemIfNeeded(SymlContentItem item, bool needed = true)
+        {
+            if (ContentList.Any())
+            {
+                // Check start and end list item
+                var previous = ContentList.Last();
+                if ((previous.IsListItem && item.IsListItem) || (previous.IsListItem && previous.Indent != item.Indent))
+                {
+                    previous.IsLastListItem = true;
+                }
+                else if (previous.IsListItem && !item.IsListItem && previous.IsListItem && previous.Indent == item.Indent)
+                {
+                    item.IsListItem = true;
+                }
+            }
+            if (needed)
+            {
+                ContentList.Add(item);
+            }
+        }
+
         private string GetComment(int idx)
         {
             string result = "";

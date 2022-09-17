@@ -234,9 +234,10 @@ namespace ConfigtEditor.Elements
             completor.ListValues.Add(GetCompletorValue("Asimov Guardian", "152"));
             completor.ListValues.Add(GetCompletorValue("AlphaOne Agent", "153"));
             completor.ListValues.Add(GetCompletorValue("Staff", "199"));
-            completor.ListValues.Add(GetCompletorValue("Saphir Leader", "300"));
-            completor.ListValues.Add(GetCompletorValue("Saphir Private", "301"));
             *///Custom Class from VT
+            //completor.ListValues.Add(GetCompletorValue("Saphir Leader", "300"));
+            //completor.ListValues.Add(GetCompletorValue("Saphir Private", "301"));
+            
             completor.ListValues.Add(GetCompletorValue("SCP-682", "682"));
 
         }
@@ -261,8 +262,9 @@ namespace ConfigtEditor.Elements
             completor.ListValues.Add(GetCompletorValue("Anderson Roblotic", "16"));
             completor.ListValues.Add(GetCompletorValue("Alpha One", "18"));
             completor.ListValues.Add(GetCompletorValue("Global Occult Coalition", "19"));
-            completor.ListValues.Add(GetCompletorValue("SAPHIR", "20")); 
             *///Team for VT plugin
+            //completor.ListValues.Add(GetCompletorValue("SAPHIR", "20")); 
+            
         }
 
         private void AddItemsToCompletor(Completor completor)

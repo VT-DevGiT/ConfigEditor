@@ -40,6 +40,7 @@ namespace ConfigtEditor.ConfigEditor
         public SymlContentItem(string name, string value) : this(name)
         {
             this.Value = value;
+            this.IsMultiLine = value.Trim().StartsWith(">-");
         }
         public SymlContentItem(string name) : this()
         {
@@ -93,6 +94,8 @@ namespace ConfigtEditor.ConfigEditor
                 return !String.IsNullOrEmpty(Name) && (Name.TakeWhile(c => c == ' ').Count() % 2 != 0);
             }
         }
+
+        public bool IsMultiLine { get; internal set; }
 
         public SymlContentItem Copy()
         {

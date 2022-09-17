@@ -44,9 +44,12 @@ namespace ConfigtEditor.ConfigEditor
             #region Methods
             protected override void ExecuteCommand()
             {
-                string name = XtraInputBox.Show("Group name", "Section Name", "Default");
+                string name = XtraInputBox.Show("Group name", "Section Name", "NewGroup");
 
-                _manager.CreateSection(name);
+                if (name == String.Empty)
+                    return;
+
+                _manager.CreateConfigSection(name);
             }
             #endregion
 
@@ -91,6 +94,7 @@ namespace ConfigtEditor.ConfigEditor
         private void InitListControl()
         {
             _listDetail = new ListControl<SymlContentItem>(_managerDetail);
+            _listDetail.GridView.OptionsView.RowAutoHeight = true;
             _panelDetail.Fill(_listDetail);
             addItemCommand = new AddListItemCommand(_managerDetail);
             _listDetail.Register("Add", addItemCommand, "Add", true, true);
@@ -155,13 +159,12 @@ namespace ConfigtEditor.ConfigEditor
             switch (_listDetail.GridView.FocusedColumn.FieldName)
             {
                 case nameof(SymlContentItem.Value):
-                    e.Cancel = line.IsList || line.IsComment;
+                    e.Cancel = line.IsList || line.IsComment || String.IsNullOrWhiteSpace(line.Name);
                     break;
                 case nameof(SymlContentItem.Action):
                     e.Cancel = line.GetCompletor == null;
                     break;
-
-            }
+            } 
         }
 
         private void CustomRowCellEdit(object sender, CustomRowCellEditEventArgs e)
@@ -170,17 +173,35 @@ namespace ConfigtEditor.ConfigEditor
             if (item != null && e.Column.FieldName == nameof(SymlContentItem.Value) && !item.IsList && !item.IsComment)
             {
                 var completor = item.GetCompletor;
+
+                /*
+                 * TODO list :
+                 * Edition des section de permition
+                 * Fix le systeme de save car ne fonctione pas
+                 * Message quand on quitte
+                 * 
+                 */
+
                 if (completor != null)
                 {
+                    
                     RepositoryItemComboBox comb = new RepositoryItemComboBox();
                     completor.ListValues.ForEach(p => comb.Items.Add(p));
                     e.RepositoryItem = comb;
                 }
                 else
                 {
-                    var btn = new RepositoryItemTextEdit();
-                    btn.ValidateOnEnterKey = true;
-                    e.RepositoryItem = btn;
+                    if (item.IsMultiLine)
+                    {
+                        var editor = new RepositoryItemMemoEdit();
+                        e.RepositoryItem = editor;
+                    }
+                    else
+                    {
+                        var btn = new RepositoryItemTextEdit();
+                        btn.ValidateOnEnterKey = true;
+                        e.RepositoryItem = btn;
+                    }
                 }
             }
          }
