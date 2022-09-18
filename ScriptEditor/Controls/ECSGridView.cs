@@ -449,7 +449,7 @@ namespace ConfigtEditor.Controls
             }
         }
 
-        public void Register(string commandKey, ICommand command, string caption, BarItemLinkAlignment cmdAlignment = BarItemLinkAlignment.Left)
+        public void Register(string commandKey, ICommand command, string caption, BarShortcut shortcut = null, BarItemLinkAlignment cmdAlignment = BarItemLinkAlignment.Left)
         {
             // Safe design
             if (String.IsNullOrWhiteSpace(commandKey)) { throw new ArgumentNullException(nameof(commandKey)); }

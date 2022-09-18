@@ -64,7 +64,7 @@ namespace ConfigtEditor.Controls
 
         #region Methods - ICommandRegistrator
 
-        public void Register(string commandKey, ICommand command, string caption, BarItemLinkAlignment cmdAlignment = BarItemLinkAlignment.Left)
+        public void Register(string commandKey, ICommand command, string caption, BarShortcut shortcut = null, BarItemLinkAlignment cmdAlignment = BarItemLinkAlignment.Left)
         {
             // Safe design
             if (String.IsNullOrWhiteSpace(commandKey)) { throw new ArgumentNullException(nameof(commandKey)); }
@@ -81,7 +81,10 @@ namespace ConfigtEditor.Controls
             command.Key = commandKey;
             BarItem barItem = CreateButton(commandKey, command, caption);
             barItem.Alignment = cmdAlignment;
-
+            if (shortcut != null)
+            {
+                barItem.ItemShortcut = shortcut;
+            }
             if (barItem != null)
             {
                 this.AddItem(barItem);

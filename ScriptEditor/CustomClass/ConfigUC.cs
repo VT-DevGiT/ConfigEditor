@@ -25,18 +25,18 @@ namespace ConfigtEditor.CustomClass
             InitializeComponent();
             var managerComp = new CompletorManager();
             var listCompletor = new ListControl<Completor>(managerComp);
-            listCompletor.Register("Add", new ElementNewCommand<Completor>(managerComp), "Add", true, true);
+            listCompletor.Register("Add", new ElementNewCommand<Completor>(managerComp), "Add", true, true, shortcut: new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
             listCompletor.Register("Edit", new ElementEditCommand<Completor>(managerComp), "Edit", true, true, true);
-            listCompletor.Register("Delete", new ElementDeleteCommand<Completor>(managerComp), "Delete", true, true);
+            listCompletor.Register("Delete", new ElementDeleteCommand<Completor>(managerComp), "Delete", true, true, shortcut: new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
             //listCompletor.Register("Refresh", new ActionCommand(() => managerComp.LoadList()), "Refresh", true, true);
             listCompletor.GridView.GridControl.ShowOnlyPredefinedDetails = true;
             panelCompletor.Fill(listCompletor);
 
             var managerValueComp = new CompletorValueManager();
             var listCompletorValue = new ListControl<CompletorValue>(managerValueComp);
-            listCompletorValue.Register("Add", new ElementNewCommand<CompletorValue>(managerValueComp), "Add", true, true);
+            listCompletorValue.Register("Add", new ElementNewCommand<CompletorValue>(managerValueComp), "Add", true, true, shortcut: new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
             listCompletorValue.Register("Edit", new ElementEditCommand<CompletorValue>(managerValueComp), "Edit", true, true, true);
-            listCompletorValue.Register("Delete", new ElementDeleteCommand<CompletorValue>(managerValueComp), "Delete", true, true);
+            listCompletorValue.Register("Delete", new ElementDeleteCommand<CompletorValue>(managerValueComp), "Delete", true, true, shortcut: new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
 
             panelValues.Fill(listCompletorValue);
             managerValueComp.LoadList(listCompletor.FocusedElement);

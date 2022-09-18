@@ -24,6 +24,31 @@ namespace ConfigtEditor.ConfigEditor
     public partial class SynapseConfigEditorUC : ECSBarUserControl, IMultipleDisplay
     {
         #region Nested
+        private class DelSectionCommand : BaseCommand<SymlSection>
+        {
+            #region Attributes & Properties
+            protected override bool CanExecuteValue => Parameter != null && Parameter.Name != "Server";
+            private SymlSectionManager _manager;
+
+
+            #endregion
+
+            #region Constructors & Destructor
+            public DelSectionCommand(SymlSectionManager manager)
+            {
+                _manager = manager;
+            }
+
+            #endregion
+
+            #region Methods
+            protected override void ExecuteCommand()
+            {
+                _manager.Delete(Parameter);
+            }
+            #endregion
+
+        }
         private class AddSectionCommand : BaseCommand
         {
             #region Attributes & Properties
@@ -89,15 +114,18 @@ namespace ConfigtEditor.ConfigEditor
         private void AddPermissionCommand()
         {
             var addSectionCommand = new AddSectionCommand(_managerSection);
-            _listSection.Register("Add", addSectionCommand, "Add Section", true, true);
+            var delSectionCommand = new DelSectionCommand(_managerSection);
+            _listSection.Register("Add", addSectionCommand, "Add Section", true, true, shortcut: new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            _listSection.Register("Del", delSectionCommand, "Del Section", true, true, shortcut: new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
         }
+
         private void InitListControl()
         {
             _listDetail = new ListControl<SymlContentItem>(_managerDetail);
             _listDetail.GridView.OptionsView.RowAutoHeight = true;
             _panelDetail.Fill(_listDetail);
             addItemCommand = new AddListItemCommand(_managerDetail);
-            _listDetail.Register("Add", addItemCommand, "Add", true, true);
+            _listDetail.Register("Add", addItemCommand, "Add", true, true, shortcut: new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
             _listDetail.GridView.ShowingEditor += CustomShowEditor;
             _listDetail.GridView.CustomRowCellEdit += CustomRowCellEdit;
             foreach (GridColumn col in _listDetail.GridView.Columns)
@@ -119,7 +147,7 @@ namespace ConfigtEditor.ConfigEditor
             _listDetail.GridView.OptionsCustomization.AllowGroup = false;
 
             deleteItemCommand = new DeleteListItemCommand(_managerDetail);
-            _listDetail.Register("Del", deleteItemCommand, "Del", true, true);
+            _listDetail.Register("Del", deleteItemCommand, "Del", true, true, shortcut: new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
 
             _listSection = new ListControl<SymlSection>(_managerSection);
             _panelConfig.Fill(_listSection);
@@ -139,8 +167,8 @@ namespace ConfigtEditor.ConfigEditor
             loadCommand.AfterExecute += (s, e) => saveCommand.OnCanExecuteChanged();
             saveCommand = new SaveConfigCommand(_managerSection);
             saveCommand.AfterExecute += (s, e) => MessageBox.Show("Config was saved");
-            this.Register("Load", loadCommand, "Load");
-            this.Register("Save", saveCommand, "Save");
+            this.Register("Load", loadCommand, "Load", new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
+            this.Register("Save", saveCommand, "Save", new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
         }
 
         private void gridSection_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
@@ -184,7 +212,6 @@ namespace ConfigtEditor.ConfigEditor
 
                 if (completor != null)
                 {
-                    
                     RepositoryItemComboBox comb = new RepositoryItemComboBox();
                     completor.ListValues.ForEach(p => comb.Items.Add(p));
                     e.RepositoryItem = comb;

@@ -35,6 +35,26 @@ namespace ConfigtEditor.ConfigEditor
             }
             return result;
         }
+        private string _multiLineStart = "";
+        internal string RestoreMultiLine()
+        {
+            var result = Value;
+            result = result.Replace("\r\n", "\n\n  ");
+            result = $"{_multiLineStart}  {result}";
+            result = result.Replace("\r", "");
+            return result;
+        }
+        internal void ChangeMultiLine()
+        {
+            int po = Value.IndexOf(">-\r\n");
+            _multiLineStart = Value.Substring(0, po + 4);
+            Value = Value.Substring(po + 4);
+        }
+
+        internal void AddMultiLineValue(string line)
+        {
+            Value = $"{Value}\r\n{line.TrimStart()}";
+        }
 
 
         public SymlContentItem(string name, string value) : this(name)
@@ -76,6 +96,8 @@ namespace ConfigtEditor.ConfigEditor
         public bool IsFirstListItem { get; set; }
         public bool IsLastListItem { get; set; }
         public string Action { get; set; }
+
+
         //[ECSDisplayColumn("IsComment", 10, 40)]
         public bool IsComment { get; set; }
         public Completor GetCompletor
@@ -102,6 +124,7 @@ namespace ConfigtEditor.ConfigEditor
             var elem = new SymlContentItem();
             elem.ParentListName = ParentListName;
             elem.Name = Name;
+            elem.ParentComment = ParentComment;
             elem.Indent = Indent;
             elem.IsListItem = IsListItem;
             elem.IsFirstListItem = IsFirstListItem;

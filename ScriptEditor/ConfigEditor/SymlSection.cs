@@ -30,15 +30,16 @@ namespace ConfigtEditor.ConfigEditor
             string result = "";
             foreach (var item in ContentList)
             {
+                string toAdd = item.Value;
                 if (item.IsMultiLine)
                 {
-                    item.Value = item.Value.Replace("\r\n", "\n");
+                    toAdd = item.RestoreMultiLine();
                 }
                 if (!String.IsNullOrWhiteSpace(result))
                 {
                     result += "\n";
                 }
-                result += $"{item.Name}{item.Value}";
+                result += $"{item.Name}{toAdd}";
             }
             return result;
         }
@@ -72,25 +73,29 @@ namespace ConfigtEditor.ConfigEditor
                     }
                     else
                     {
-                        if (item?.IsComment == true && !String.IsNullOrWhiteSpace(line))
+                        if (item?.IsMultiLine == true)//!String.IsNullOrEmpty(item?.Value))
                         {
-                            item.Name = $"{item.Name}\n{line}";
-                            AddItemIfNeeded(item,false);
-                        }
-                        else if (item?.IsMultiLine == true)//!String.IsNullOrEmpty(item?.Value))
-                        {
-                            item.Value = $"{item.Value}\n{line}";
+                            if (!String.IsNullOrWhiteSpace(line))
+                            {
+                                item.AddMultiLineValue(line);
+                            }
                             AddItemIfNeeded(item, false);
                         }
-                        else {
+                        else
+                        {
                             item = new SymlContentItem(line);
-                            AddItemIfNeeded(item);   
+                            if (line.EndsWith(":"))
+                            {
+                                item.IsList = true;
+                            }
+                            AddItemIfNeeded(item);
                         }
                     }
                 }
             }
- 
+
             // Add the structure item to the List entry
+            /*
             for (int i = 0; i < ContentList.Count; i++)
             {
                 SymlContentItem elem = ContentList[i];
@@ -102,6 +107,13 @@ namespace ConfigtEditor.ConfigEditor
                         elem = ContentList[j];
                         elem.IsComment = !elem.Name.Contains(":");
                     }
+                }
+            }*/
+            foreach (var elem in ContentList)
+            {
+                if (elem.IsMultiLine)
+                {
+                    elem.ChangeMultiLine();
                 }
             }
             // Add the Comment item 

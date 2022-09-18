@@ -7,6 +7,7 @@ using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using ConfigtEditor.Interfaces;
+using DevExpress.XtraBars;
 
 namespace ConfigtEditor.Controls
 {
@@ -43,13 +44,13 @@ namespace ConfigtEditor.Controls
         #region Methods - ICommandRegistrator
 
 
-        public override void Register(string commandKey, ICommand command, string caption, bool onBar, bool onMenu, bool onDoubleClick = false)
+        public override void Register(string commandKey, ICommand command, string caption, bool onBar, bool onMenu, bool onDoubleClick = false, BarShortcut shortcut = null)
         {
             // Safe design
             if (String.IsNullOrWhiteSpace(commandKey)) { throw new ArgumentNullException(nameof(commandKey)); }
             if (command == null) { throw new ArgumentNullException(nameof(command)); }
 
-            base.Register(commandKey, command, caption, onBar, onMenu, onDoubleClick);
+            base.Register(commandKey, command, caption, onBar, onMenu, onDoubleClick, shortcut);
             // Enregistrement des commandes nécessitant un paramètre T
             AddCommand(command);
         }
@@ -221,7 +222,7 @@ namespace ConfigtEditor.Controls
 
         #region Methods - ICommandRegistrator
 
-        public virtual void Register(string commandKey, ICommand command, string caption, bool onBar, bool onMenu, bool onDoubleClick = false)
+        public virtual void Register(string commandKey, ICommand command, string caption, bool onBar, bool onMenu, bool onDoubleClick = false, BarShortcut shortcut = null)
         {
             // Safe design
             if (String.IsNullOrWhiteSpace(commandKey)) { throw new ArgumentNullException(nameof(commandKey)); }
@@ -230,7 +231,7 @@ namespace ConfigtEditor.Controls
             // Ajout à la bar de commande
             if (onBar)
             {
-                base.Register(commandKey, command, caption);
+                base.Register(commandKey, command, caption, shortcut);
             }
 
             // Ajout au menu contextuel
