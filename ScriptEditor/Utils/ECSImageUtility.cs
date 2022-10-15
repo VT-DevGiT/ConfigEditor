@@ -61,7 +61,7 @@ namespace ConfigtEditor.Utils
         public static Bitmap GetImage(string name, int size = 24)
         {
             // Safe design
-            if (String.IsNullOrWhiteSpace(name)) { throw new ArgumentNullException(nameof(name)); }
+            if (String.IsNullOrWhiteSpace(name)) return null;
 
             string nameIco = $"{name}_{size}";
             if (_dicBitmap.ContainsKey(nameIco))

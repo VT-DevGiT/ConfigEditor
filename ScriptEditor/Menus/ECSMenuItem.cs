@@ -43,7 +43,7 @@ namespace ConfigtEditor.Menus
         public ECSMenuItem(string caption, string iconName, Action clickAction) : this(caption, true)
         {
             // Safe design
-            if (String.IsNullOrWhiteSpace(iconName)) { throw new ArgumentNullException(nameof(iconName)); }
+            //if (String.IsNullOrWhiteSpace(iconName)) { throw new ArgumentNullException(nameof(iconName)); }
             if (clickAction == null) { throw new ArgumentNullException(nameof(clickAction)); }
 
             this.ImageOptions.SmallImage = ECSImageUtility.GetImage(iconName);

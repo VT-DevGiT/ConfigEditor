@@ -69,7 +69,7 @@ namespace ConfigtEditor.Metadatas
         {
             // Safe design
             if (String.IsNullOrWhiteSpace(text)) { throw new ArgumentNullException(nameof(text)); }
-            if (String.IsNullOrWhiteSpace(iconName)) { throw new ArgumentNullException(nameof(iconName)); }
+            //if (String.IsNullOrWhiteSpace(iconName)) { throw new ArgumentNullException(nameof(iconName)); }
 
             Register<T>(() => new ECSMetadata(typeof(T), text, iconName, addControlText));
         }
