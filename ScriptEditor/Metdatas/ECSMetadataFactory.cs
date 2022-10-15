@@ -89,9 +89,9 @@ namespace ConfigtEditor.Metadatas
         private void RegisterAll()
         {
             Register<CustomSynapseClass>("Custom class", "ICN_CUSTOM_CLASS"); // 
-            Register<SynapseConfigEditor>("Config Editor", "ICN_CUSTOM_CLASS");
+            Register<SynapseConfigEditor>("Config Editor", "ICN_PRODUCT_HIERARCHY");
             Register<Config>("Config Editor Parameter", "ICN_CUSTOM_CLASS");
-            Register<SynapsePermissionEditor>("Permission Editor", "ICN_CUSTOM_CLASS");
+            Register<SynapsePermissionEditor>("Permission Editor", "ICN_ACTION_ELEMENT_DROIT");
         }
 
         #endregion

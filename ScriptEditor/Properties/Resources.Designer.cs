@@ -59,5 +59,35 @@ namespace ConfigEditor.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Icon semblable à (Icône).
+        /// </summary>
+        internal static System.Drawing.Icon ICN_ACTION_ELEMENT_DROIT {
+            get {
+                object obj = ResourceManager.GetObject("ICN_ACTION_ELEMENT_DROIT", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Icon semblable à (Icône).
+        /// </summary>
+        internal static System.Drawing.Icon ICN_CUSTOM_CLASS {
+            get {
+                object obj = ResourceManager.GetObject("ICN_CUSTOM_CLASS", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Icon semblable à (Icône).
+        /// </summary>
+        internal static System.Drawing.Icon ICN_PRODUCT_HIERARCHY {
+            get {
+                object obj = ResourceManager.GetObject("ICN_PRODUCT_HIERARCHY", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
     }
 }
