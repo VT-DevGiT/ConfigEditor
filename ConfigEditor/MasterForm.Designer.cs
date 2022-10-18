@@ -128,7 +128,7 @@
             this.IconOptions.Icon = ((System.Drawing.Icon)(resources.GetObject("MasterForm.IconOptions.Icon")));
             this.IsMdiContainer = true;
             this.Name = "MasterForm";
-            this.Text = "MasterForm";
+            this.Text = "ConfigEditor";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.DocumentManager)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._barManager)).EndInit();

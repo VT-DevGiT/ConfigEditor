@@ -80,8 +80,10 @@ namespace ConfigtEditor.ConfigEditor
 
         }
         #endregion
+
         private static int NextHash = 0;
         private int hash = -1;
+
         public override int GetHashCode()
         {
             if (hash == -1)
@@ -91,6 +93,7 @@ namespace ConfigtEditor.ConfigEditor
             }
             return hash;
         }
+
         private LoadConfigCommand loadCommand;
         private SaveConfigCommand saveCommand;
         private AddListItemCommand addItemCommand;
@@ -99,6 +102,7 @@ namespace ConfigtEditor.ConfigEditor
         private SymlDetailManager _managerDetail = new SymlDetailManager();
         private ListControl<SymlSection> _listSection;
         private ListControl<SymlContentItem> _listDetail;
+
         public SynapseConfigEditorUC(bool permission = false)
         {
             InitializeComponent();
@@ -179,6 +183,7 @@ namespace ConfigtEditor.ConfigEditor
                 _managerDetail.LoadContent(item);
             }
         }
+
         #region Events
         private void CustomShowEditor(object sender, CancelEventArgs e)
         {

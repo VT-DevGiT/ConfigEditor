@@ -35,6 +35,7 @@ namespace ConfigtEditor.ConfigEditor
             }
             return result;
         }
+
         private string _multiLineStart = "";
         internal string RestoreMultiLine()
         {
@@ -80,6 +81,7 @@ namespace ConfigtEditor.ConfigEditor
             return structureList;
         }
 
+        #region Prop
         [ECSDisplayColumn("Name", 1, 40)]
         public string Name { get; set; }
         [ECSDisplayColumn("Value", 2, 20)]
@@ -118,6 +120,7 @@ namespace ConfigtEditor.ConfigEditor
         }
 
         public bool IsMultiLine { get; internal set; }
+        #endregion
 
         public SymlContentItem Copy()
         {
