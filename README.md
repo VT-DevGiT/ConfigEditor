@@ -9,7 +9,7 @@ When Synapse3 is released changes will be made to support it.
 
 ## Bug
 
-If you find a bug please contact me on discord (Warkis, I'm on [Synapse's discord](https://discord.gg/wSBHXwy)) or make an issue.
+If you find a bug please contact me on discord (Warkis, I'm on the [Synapse discord](https://discord.gg/wSBHXwy)) or make an issue.
 
 ## Contribute
 
