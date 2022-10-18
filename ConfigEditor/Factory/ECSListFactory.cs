@@ -75,15 +75,12 @@ namespace ConfigtEditor.Factory
                 var ctrl = new SynapseConfigEditorUC();
                 return ctrl;
             });
-
             Register<SynapsePermissionEditor>(() =>
             {
                 var ctrl = new SynapseConfigEditorUC(true);
                 return ctrl;
             });
-
-
-             Register<Config>(() => new ConfigUC());
+            Register<Config>(() => new ConfigUC());
         }
 
 
