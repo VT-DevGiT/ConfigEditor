@@ -10,7 +10,7 @@ using ConfigEditor.Interfaces;
 
 namespace ConfigtEditor.Forms
 {
-    public partial class ECSChildForm : DevExpress.XtraEditors.XtraForm
+    public partial class ECSChildForm : DevExpress.XtraEditors.XtraForm, ISavable
     {
         #region Properties
 
@@ -26,6 +26,17 @@ namespace ConfigtEditor.Forms
                 if (_control is ISavable)
                 {
                     return (_control as ISavable).NeedToSave;
+                }
+                return false;
+            }
+        }
+        public bool CancelClose
+        {
+            get
+            {
+                if (_control is ISavable)
+                {
+                    return (_control as ISavable).CancelClose;
                 }
                 return false;
             }

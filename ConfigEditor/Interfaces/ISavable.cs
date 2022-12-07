@@ -8,5 +8,7 @@ namespace ConfigEditor.Interfaces
 {
     internal interface ISavable
     {
+        bool NeedToSave { get; }
+        bool CancelClose { get; }
     }
 }

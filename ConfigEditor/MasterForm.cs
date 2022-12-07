@@ -22,17 +22,27 @@ namespace ConfigtEditor
 
         private void MasterForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            var lstToClose = new List<Form>();
             foreach (Form form in Application.OpenForms)
             {
                 if (form is ECSChildForm)
                 {
-                    if ((form as ECSChildForm).GetHashCode() == hash)
+                    var canceled = (form as ECSChildForm).CancelClose;
+                    if (canceled)
                     {
-                        return form;
+                        e.Cancel = true;
+                        foreach(var frm in lstToClose)
+                        {
+                            frm.Close();
+                        }
+                        return;
+                    }
+                    else
+                    {
+                        lstToClose.Add(form);
                     }
                 }
             }
-            e.Cancel = true;
         }
     }
 }

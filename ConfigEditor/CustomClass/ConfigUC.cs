@@ -19,7 +19,7 @@ using ConfigEditor.Interfaces;
 
 namespace ConfigtEditor.CustomClass
 {
-    public partial class ConfigUC : ECSUserControl, ISavable
+    public partial class ConfigUC : ECSUserControl
     {
         public ConfigUC()
         {

@@ -1,4 +1,5 @@
-﻿using ConfigtEditor.Commands;
+﻿using ConfigEditor.Interfaces;
+using ConfigtEditor.Commands;
 using ConfigtEditor.Controls;
 using ConfigtEditor.Interfaces;
 using ConfigtEditor.Utils;
@@ -15,7 +16,7 @@ using System.Windows.Forms;
 
 namespace ConfigtEditor.ConfigEditor
 {
-    public partial class SynapseConfigEditorUC : ECSBarUserControl, IMultipleDisplay
+    public partial class SynapseConfigEditorUC : ECSBarUserControl, IMultipleDisplay, ISavable
     {
         #region Nested
         private class DelSectionCommand : BaseCommand<SymlSection>
@@ -100,7 +101,8 @@ namespace ConfigtEditor.ConfigEditor
         private ListControl<SymlSection> _listSection;
         private ListControl<SymlContentItem> _listDetail;
         private bool _changed = false;
-
+        public bool CancelClose { get; private set; }
+        public bool NeedToSave => _changed;
 
         public SynapseConfigEditorUC(bool permission = false)
         {
@@ -137,13 +139,14 @@ namespace ConfigtEditor.ConfigEditor
         internal void AskUserSave(CancelEventArgs ev)
         {
             if (ev.Cancel) return;
-
+            CancelClose = false;
             if (_changed)
             {
                 switch (MessageBox.Show(closeMessage, "Warning", MessageBoxButtons.YesNoCancel))
                 {
                     case DialogResult.Cancel:
                         ev.Cancel = true;
+                        CancelClose = true;
                         return;
                     case DialogResult.Yes:
                         saveCommand.Execute();
