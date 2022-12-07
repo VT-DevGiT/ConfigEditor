@@ -27,7 +27,6 @@ namespace ConfigtEditor.Controls
         private ToolTipController _toolTipController = new ToolTipController { AutoPopDelay = 20000 };
         private bool _colPolutated = false;
 
-        private GridViewMenu _gridConfigMenu;
         private int _nbMenuItemAtEnd = 0;
         private IDictionary<string, ECSDisplayAttribute> _displayColumnAttributes;
         private GridViewMenu _gridViewMenu;

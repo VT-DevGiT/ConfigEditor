@@ -1,6 +1,6 @@
 ﻿using ConfigtEditor.Interfaces;
 using System;
-
+using System.ComponentModel;
 
 namespace ConfigtEditor.Commands
 {
@@ -40,7 +40,6 @@ namespace ConfigtEditor.Commands
     public abstract class BaseCommand<T> : BaseCommand, ICommand<T>
     {
         #region Attributes & Properties
-        public string Key { get; set; }
         private T _parameter;
         public virtual T Parameter
         {
@@ -191,12 +190,12 @@ namespace ConfigtEditor.Commands
 
         protected virtual void OnAfterExecute()
         {
-            AfterExecute?.Invoke(this, new ExeCommandArgs { ExecutionCancelled = UserCancelled });
+            AfterExecute?.Invoke(this, new ExeCommandArgs { Cancel = UserCancelled });
         }
 
         protected virtual void OnBeforeExecute()
         {
-            BeforeExecute?.Invoke(this, new ExeCommandArgs { ExecutionCancelled = UserCancelled });
+            BeforeExecute?.Invoke(this, new ExeCommandArgs { Cancel = UserCancelled });
         }
         #endregion
     }
@@ -204,8 +203,8 @@ namespace ConfigtEditor.Commands
     /// <summary>
     /// Includes argument to specify if the user has cancelled the execution
     /// </summary>
-    public class ExeCommandArgs : EventArgs
+    public class ExeCommandArgs : CancelEventArgs
     {
-        public bool ExecutionCancelled { get; set; }
+    
     }
 }

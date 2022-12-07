@@ -15,7 +15,6 @@ namespace ConfigtEditor.ConfigEditor
     class LoadConfigCommand : BaseCommand
     {
         private SymlSectionManager _managerSection;
-        private bool _isPermission;
 
         public LoadConfigCommand(SymlSectionManager managerSection)
         {

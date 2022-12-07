@@ -6,6 +6,7 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraPrinting.Native;
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -74,6 +75,7 @@ namespace ConfigtEditor.ConfigEditor
         }
         #endregion
 
+        private const string closeMessage = "you didn't save your changes! Do you want save it?";
         private static int NextHash = 0;
         private int hash = -1;
 
@@ -88,6 +90,7 @@ namespace ConfigtEditor.ConfigEditor
         }
 
         private AddSectionCommand addSectionCommand;
+        private DelSectionCommand delSectionCommand;
         private LoadConfigCommand loadCommand;
         private SaveConfigCommand saveCommand;
         private AddListItemCommand addItemCommand;
@@ -104,33 +107,56 @@ namespace ConfigtEditor.ConfigEditor
             InitializeComponent();
             InitListControl();
             InitCommands();
-            InitWarning();
             if (permission)
             {
                 AddPermissionCommand();
             }
-            
+            InitWarning(permission);
         }
 
-        private void InitWarning()
+
+        private void InitWarning(bool permission)
         {
             _listDetail.GridView.ValidateRow += (s, e) => _changed = true;
-            saveCommand.AfterExecute += (s, e) => _changed = false;
-            this.Load += (s, e) =>
+            addItemCommand.AfterExecute += (s, e) => _changed = true;
+            if (permission)
             {
-                this.FindForm().FormClosing += (fs, fe) =>
-                {
-                    const string closeMessage = "You have not saved your changes! Do you want save?";
-                    if (_changed && MessageBox.Show(closeMessage, "Warning", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                        saveCommand.Execute();
-                };
+                addSectionCommand.AfterExecute += (s, e) => _changed = true;
+                delSectionCommand.AfterExecute += (s, e) => _changed = true;
+            }
+            saveCommand.AfterExecute += (s, e) => _changed = false;
+            loadCommand.AfterExecute += (s, e) => _changed = false;
+            loadCommand.BeforeExecute += (s, e) => AskUserSave(e);
+
+            this.Load += (s, e) => 
+            { 
+                this.FindForm().FormClosing += (fs, fe) => AskUserSave(fe);
             };
+        }
+
+        internal void AskUserSave(CancelEventArgs ev)
+        {
+            if (ev.Cancel) return;
+
+            if (_changed)
+            {
+                switch (MessageBox.Show(closeMessage, "Warning", MessageBoxButtons.YesNoCancel))
+                {
+                    case DialogResult.Cancel:
+                        ev.Cancel = true;
+                        return;
+                    case DialogResult.Yes:
+                        saveCommand.Execute();
+                        break;
+                }
+            }
+            
         }
 
         private void AddPermissionCommand()
         {
             addSectionCommand = new AddSectionCommand(_managerSection);
-            var delSectionCommand = new DelSectionCommand(_managerSection);
+            delSectionCommand = new DelSectionCommand(_managerSection);
             _listSection.Register("Add", addSectionCommand, "Add Section", true, true, shortcut: new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
             _listSection.Register("Del", delSectionCommand, "Del Section", true, true, shortcut: new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
         }
@@ -167,7 +193,7 @@ namespace ConfigtEditor.ConfigEditor
 
             _listSection = new ListControl<SymlSection>(_managerSection);
             _panelConfig.Fill(_listSection);
-            _listSection.GridView.FocusedRowChanged += gridSection_FocusedRowChanged;
+            _listSection.GridView.FocusedRowChanged += GridSection_FocusedRowChanged;
 
 
         }
@@ -196,7 +222,7 @@ namespace ConfigtEditor.ConfigEditor
             this.Register("Save", saveCommand, "Save", new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
         }
 
-        private void gridSection_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        private void GridSection_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
             var item = _listSection.FocusedElement;
             if (item != null)
