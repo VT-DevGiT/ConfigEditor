@@ -14,8 +14,7 @@ namespace ConfigtEditor.ConfigEditor
         {
             Syml = new SYML(v);
             Syml.Load();
-            LoadList(Syml.Sections.Keys.ToList().Select(p => new SymlSection(p, Syml.Sections[p].Content)).ToList());
-
+            LoadList(Syml.Sections.Keys.Select(p => new SymlSection(p, Syml.Sections[p].Content)).ToList());
         }
 
         internal void Save()

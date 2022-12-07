@@ -192,7 +192,7 @@
         private DevExpress.XtraEditors.ComboBoxEdit cbType;
         private DevExpress.XtraEditors.TextEdit textEdit2;
         private DevExpress.XtraEditors.TextEdit textEdit1;
-        private DevExpress.XtraLayout.LayoutControlItem Name;
+        private new DevExpress.XtraLayout.LayoutControlItem Name;
         private DevExpress.XtraLayout.LayoutControlItem Type;
         private DevExpress.XtraLayout.LayoutControlItem Contain;
         private DevExpress.XtraEditors.CheckEdit checkEdit1;

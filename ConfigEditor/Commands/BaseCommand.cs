@@ -40,7 +40,6 @@ namespace ConfigtEditor.Commands
     public abstract class BaseCommand<T> : BaseCommand, ICommand<T>
     {
         #region Attributes & Properties
-        public string Key { get; set; }
         private T _parameter;
         public virtual T Parameter
         {
