@@ -42,13 +42,11 @@ namespace ConfigtEditor.Menus
         {
 
             var menuSynapse = new ECSMenuControl("Synapse");
-            ECSMenuGroup grpClass = (ECSMenuGroup)menuSynapse.Groups.Add(new ECSMenuGroup("Classe"));
+            var grpClass = menuSynapse.AddGroup(new ECSMenuGroup("Common"));
             grpClass.AddItem<SynapseConfigEditor>();
             grpClass.AddItem<SynapsePermissionEditor>();
             grpClass.AddItem<Config>();
             //grpClass.AddItem<CustomSynapseClass>();
-
-
 
             menuSynapse.Visible = true;
             this._tabControl.TabPages.Add(new ECSMenuTabPage(menuSynapse));

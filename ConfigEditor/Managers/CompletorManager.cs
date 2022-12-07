@@ -13,6 +13,7 @@ namespace ConfigtEditor.Managers
     {
         public object CurrentObject { get; set; }
         public Completor Current => CurrentObject as Completor;
+        
         public void PrepareNew()
         {
             CurrentObject = new Completor();
@@ -23,12 +24,14 @@ namespace ConfigtEditor.Managers
         {
 
         }
+
         public override DelStatus Delete(Completor element)
         {
             var result = base.Delete(element);
             Config.Singleton.Save();
             return result;
         }
+        
         public bool Save()
         {
             if (Current.IsNew())

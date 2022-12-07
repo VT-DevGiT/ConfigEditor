@@ -144,12 +144,6 @@
     <Compile Include="ConfigEditor\ConfigSection.cs" />
     <Compile Include="ConfigEditor\DeleteListItemCommand.cs" />
     <Compile Include="ConfigEditor\LoadConfigCommand.cs" />
-    <Compile Include="ConfigEditor\RoomEditUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ConfigEditor\RoomEditUC.Designer.cs">
-      <DependentUpon>RoomEditUC.cs</DependentUpon>
-    </Compile>
     <Compile Include="ConfigEditor\SaveConfigCommand.cs" />
     <Compile Include="ConfigEditor\SYML.cs" />
     <Compile Include="ConfigEditor\SymlContentItem.cs" />
@@ -225,7 +219,6 @@
     </Compile>
     <Compile Include="CustomClass\CustomSynapseClassManager.cs" />
     <Compile Include="CustomClass\CustomSynapseListClass.cs" />
-    <Compile Include="ConfigEditor\RoomManager.cs" />
     <Compile Include="DialogWaitCommand.cs" />
     <Compile Include="Elements\BaseElement.cs" />
     <Compile Include="Elements\BaseStringElement.cs" />
@@ -293,9 +286,6 @@
     <Compile Include="Utils\GridViewExtensions.cs" />
     <Compile Include="Utils\Memento.cs" />
     <Compile Include="Utils\Singleton.cs" />
-    <EmbeddedResource Include="ConfigEditor\RoomEditUC.resx">
-      <DependentUpon>RoomEditUC.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ConfigEditor\SynapseConfigEditorUC.resx">
       <DependentUpon>SynapseConfigEditorUC.cs</DependentUpon>
     </EmbeddedResource>

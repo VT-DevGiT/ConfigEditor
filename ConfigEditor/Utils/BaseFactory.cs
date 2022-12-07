@@ -18,8 +18,10 @@ namespace ConfigtEditor.Utils
 
         #region Constructors & Destructor
 
-        protected BaseFactory()
-        { }
+        protected BaseFactory() 
+        { 
+        
+        }
 
         #endregion
 

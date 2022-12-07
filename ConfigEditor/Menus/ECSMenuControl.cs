@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq;
+using ConfigtEditor.Metadatas;
+using ConfigtEditor.Utils;
 using DevExpress.XtraNavBar;
 
 
@@ -38,7 +40,7 @@ namespace ConfigtEditor.Menus
         /// <summary>
         /// Adds a group to the menu (a group holds menu items)
         /// </summary>
-        protected ECSMenuGroup AddGroup(ECSMenuGroup group)
+        public ECSMenuGroup AddGroup(ECSMenuGroup group)
         {
             // Safe design
             if (group == null) { throw new ArgumentNullException(nameof(group)); }

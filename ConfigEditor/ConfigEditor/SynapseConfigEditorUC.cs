@@ -1,23 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using DevExpress.XtraEditors;
+﻿using ConfigtEditor.Commands;
 using ConfigtEditor.Controls;
+using ConfigtEditor.Interfaces;
 using ConfigtEditor.Utils;
-using ConfigtEditor.Managers;
+using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraEditors.Repository;
-using DevExpress.XtraEditors.Controls;
-using ConfigtEditor.Commands;
-using ConfigtEditor.Interfaces;
-using ConfigtEditor.Elements;
+using System;
+using System.ComponentModel;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace ConfigtEditor.ConfigEditor
 {
@@ -52,7 +45,7 @@ namespace ConfigtEditor.ConfigEditor
         private class AddSectionCommand : BaseCommand
         {
             #region Attributes & Properties
-            protected override bool CanExecuteValue => true;
+            protected override bool CanExecuteValue => _manager.ElementList.Any();
             private SymlSectionManager _manager;
 
 
@@ -80,8 +73,10 @@ namespace ConfigtEditor.ConfigEditor
 
         }
         #endregion
+
         private static int NextHash = 0;
         private int hash = -1;
+
         public override int GetHashCode()
         {
             if (hash == -1)
@@ -91,6 +86,8 @@ namespace ConfigtEditor.ConfigEditor
             }
             return hash;
         }
+
+        private AddSectionCommand addSectionCommand;
         private LoadConfigCommand loadCommand;
         private SaveConfigCommand saveCommand;
         private AddListItemCommand addItemCommand;
@@ -99,23 +96,40 @@ namespace ConfigtEditor.ConfigEditor
         private SymlDetailManager _managerDetail = new SymlDetailManager();
         private ListControl<SymlSection> _listSection;
         private ListControl<SymlContentItem> _listDetail;
-        private bool changed;
+        private bool _changed = false;
+
 
         public SynapseConfigEditorUC(bool permission = false)
         {
             InitializeComponent();
             InitListControl();
             InitCommands();
+            InitWarning();
             if (permission)
             {
                 AddPermissionCommand();
             }
+            
+        }
 
+        private void InitWarning()
+        {
+            _listDetail.GridView.ValidateRow += (s, e) => _changed = true;
+            saveCommand.AfterExecute += (s, e) => _changed = false;
+            this.Load += (s, e) =>
+            {
+                this.FindForm().FormClosing += (fs, fe) =>
+                {
+                    const string closeMessage = "You have not saved your changes! Do you want save?";
+                    if (_changed && MessageBox.Show(closeMessage, "Warning", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                        saveCommand.Execute();
+                };
+            };
         }
 
         private void AddPermissionCommand()
         {
-            var addSectionCommand = new AddSectionCommand(_managerSection);
+            addSectionCommand = new AddSectionCommand(_managerSection);
             var delSectionCommand = new DelSectionCommand(_managerSection);
             _listSection.Register("Add", addSectionCommand, "Add Section", true, true, shortcut: new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
             _listSection.Register("Del", delSectionCommand, "Del Section", true, true, shortcut: new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
@@ -166,7 +180,11 @@ namespace ConfigtEditor.ConfigEditor
         private void InitCommands()
         {
             loadCommand = new LoadConfigCommand(_managerSection);
-            loadCommand.AfterExecute += (s, e) => saveCommand.OnCanExecuteChanged();
+            loadCommand.AfterExecute += (s, e) =>
+            {
+                saveCommand.OnCanExecuteChanged();
+                addSectionCommand?.OnCanExecuteChanged();
+            };
             saveCommand = new SaveConfigCommand(_managerSection);
             saveCommand.AfterExecute += (s, e) => MessageBox.Show("Config was saved");
             saveCommand.BeforeExecute += (s, e) =>
@@ -186,6 +204,7 @@ namespace ConfigtEditor.ConfigEditor
                 _managerDetail.LoadContent(item);
             }
         }
+
         #region Events
         private void CustomShowEditor(object sender, CancelEventArgs e)
         {
@@ -208,14 +227,6 @@ namespace ConfigtEditor.ConfigEditor
             if (item != null && e.Column.FieldName == nameof(SymlContentItem.Value) && !item.IsList && !item.IsComment)
             {
                 var completor = item.GetCompletor;
-
-                /*
-                 * TODO list :
-                 * Edition des section de permition
-                 * Fix le systeme de save car ne fonctione pas
-                 * Message quand on quitte
-                 * 
-                 */
 
                 if (completor != null)
                 {

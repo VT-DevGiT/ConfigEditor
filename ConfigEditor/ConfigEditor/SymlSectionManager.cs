@@ -27,6 +27,7 @@ namespace ConfigtEditor.ConfigEditor
             Syml.Store();
         }
 
+        //Change it for Synapse 3
         private const string emptyPermissionSection = @"[/NAME/]
 {
 # If Enabled this Group will be assigned to all players, which are in no other Group
