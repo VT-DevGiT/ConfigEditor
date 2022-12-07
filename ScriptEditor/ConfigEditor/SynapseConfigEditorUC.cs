@@ -99,6 +99,8 @@ namespace ConfigtEditor.ConfigEditor
         private SymlDetailManager _managerDetail = new SymlDetailManager();
         private ListControl<SymlSection> _listSection;
         private ListControl<SymlContentItem> _listDetail;
+        private bool changed;
+
         public SynapseConfigEditorUC(bool permission = false)
         {
             InitializeComponent();
@@ -128,6 +130,7 @@ namespace ConfigtEditor.ConfigEditor
             _listDetail.Register("Add", addItemCommand, "Add", true, true, shortcut: new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
             _listDetail.GridView.ShowingEditor += CustomShowEditor;
             _listDetail.GridView.CustomRowCellEdit += CustomRowCellEdit;
+
             foreach (GridColumn col in _listDetail.GridView.Columns)
             {
                 if (col.FieldName != nameof(SymlContentItem.Value) && col.FieldName != nameof(SymlContentItem.Action))
@@ -142,10 +145,9 @@ namespace ConfigtEditor.ConfigEditor
             _listDetail.GridView.SetFontColorFor<SymlContentItem>(nameof(SymlContentItem.Name), GetErrorColor);
             _listDetail.GridView.OptionsBehavior.ReadOnly = false;
             _listDetail.GridView.OptionsBehavior.Editable = true;
-            _listDetail.GridView.OptionsCustomization.AllowFilter = false;
+            _listDetail.GridView.OptionsCustomization.AllowFilter = true;
             _listDetail.GridView.OptionsCustomization.AllowSort = false;
             _listDetail.GridView.OptionsCustomization.AllowGroup = false;
-
             deleteItemCommand = new DeleteListItemCommand(_managerDetail);
             _listDetail.Register("Del", deleteItemCommand, "Del", true, true, shortcut: new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
 
@@ -167,6 +169,11 @@ namespace ConfigtEditor.ConfigEditor
             loadCommand.AfterExecute += (s, e) => saveCommand.OnCanExecuteChanged();
             saveCommand = new SaveConfigCommand(_managerSection);
             saveCommand.AfterExecute += (s, e) => MessageBox.Show("Config was saved");
+            saveCommand.BeforeExecute += (s, e) =>
+            {
+                _listDetail.FocusedElement = _managerDetail.ElementList.First();
+                //_listDetail.GridView.SetFocusedRowModified();
+            };
             this.Register("Load", loadCommand, "Load", new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
             this.Register("Save", saveCommand, "Save", new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
         }
