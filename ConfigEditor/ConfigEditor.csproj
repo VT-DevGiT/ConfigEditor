@@ -244,6 +244,7 @@
     <Compile Include="Interfaces\IContextManager.cs" />
     <Compile Include="Interfaces\IListManager.cs" />
     <Compile Include="Interfaces\IMultipleDisplay.cs" />
+    <Compile Include="Interfaces\ISavable.cs" />
     <Compile Include="Interfaces\ISelectableControl.cs" />
     <Compile Include="Interfaces\IWriteManager.cs" />
     <Compile Include="Managers\CompletorManager.cs" />
