@@ -2,13 +2,20 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace ConfigtEditor.ConfigEditor
 {
     public class SymlSection
     {
+        private const string CommentIndicator = "#";
+        private const string ListItemIndicator = "- ";
+        private const string ValueSepartor = ": ";
+        private const string ListIndicator = ":";
+
         [ECSDisplayColumn("Name", 1, 20)]
         public string Name { get; set; }
 
@@ -50,25 +57,26 @@ namespace ConfigtEditor.ConfigEditor
             SymlContentItem item = null;
             foreach (var line in toParse)
             {
-                if (line.StartsWith("#"))
+                if (line.StartsWith(CommentIndicator))
                 {
                     item = new SymlContentItem(line);
                     item.IsComment = true;
                     AddItemIfNeeded(item);
                 }
-                else if (line.Contains(": "))
+                else if (line.Contains(ValueSepartor))
                 {
-                    var splt = line.Split(new string[] { ": " }, StringSplitOptions.None);
-                    item = new SymlContentItem(splt[0] + ": ", Join(splt, ": "));
+                    var splt = line.Split(new string[] { ValueSepartor }, StringSplitOptions.None);
+                    item = new SymlContentItem(splt[0] + ValueSepartor, Join(splt, ValueSepartor));
+                    if (IsEmptyList(splt[1]))
+                        item.IsList = true;
                     AddItemIfNeeded(item);
-
                 }
                 else
                 {
-                    if (line.Contains("- "))
+                    if (line.Contains(ListItemIndicator))
                     {
-                        var splt = line.Split(new string[] { "- " }, StringSplitOptions.None);
-                        item = new SymlContentItem(splt[0] + "- ", Join(splt, "- "));
+                        var splt = line.Split(new string[] { ListItemIndicator }, StringSplitOptions.None);
+                        item = new SymlContentItem(splt[0] + ListItemIndicator, Join(splt, ListItemIndicator));
                         AddItemIfNeeded(item);
                     }
                     else
@@ -84,7 +92,7 @@ namespace ConfigtEditor.ConfigEditor
                         else
                         {
                             item = new SymlContentItem(line);
-                            if (line.EndsWith(":"))
+                            if (line.EndsWith(ListIndicator))
                             {
                                 item.IsList = true;
                             }
@@ -157,6 +165,14 @@ namespace ConfigtEditor.ConfigEditor
             // Add Parent list name
 
         }
+
+        private bool IsEmptyList(string value)
+        {
+            if (Regex.IsMatch(value, pattern: @"( *\[( *)\])$"))
+                return true;
+            return false;
+        }
+
 
         private void AddItemIfNeeded(SymlContentItem item, bool needed = true)
         {

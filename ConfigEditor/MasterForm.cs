@@ -16,7 +16,7 @@ namespace ConfigtEditor
         public MasterForm()
         {
             InitializeComponent();
-
         }
+
     }
 }

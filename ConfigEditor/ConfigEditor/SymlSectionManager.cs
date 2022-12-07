@@ -26,11 +26,10 @@ namespace ConfigtEditor.ConfigEditor
             Syml.Store();
         }
 
-        //Change it for Synapse 3
         private const string emptyPermissionSection = @"[/NAME/]
 {
 # If Enabled this Group will be assigned to all players, which are in no other Group
-default: true
+default: false
 # If Enabled this Group will be assigned to Northwood staff players, which are in no other Group
 northwood: false
 # If Enabled this Group has Acces to RemoteAdmin
@@ -52,10 +51,11 @@ permissions:
 - synapse.command.help
 - synapse.command.plugins
 # Gives the Group the Permissions of all Groups in this List
-inheritance: 
+inheritance: [ ]
 # The UserID's of the Players in the Group
-members:
+members: [ ]
 }";
+
         internal void CreateConfigSection(string name)
         {
             if (Syml != null)
