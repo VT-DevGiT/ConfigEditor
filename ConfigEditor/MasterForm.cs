@@ -31,7 +31,8 @@ namespace ConfigtEditor
                     if (canceled)
                     {
                         e.Cancel = true;
-                        foreach(var frm in lstToClose)
+                        form.Focus();
+                        foreach (var frm in lstToClose)
                         {
                             frm.Close();
                         }
