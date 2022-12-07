@@ -15,10 +15,11 @@ using DevExpress.XtraGrid.Columns;
 using ConfigtEditor.Commands;
 using ConfigtEditor.ConfigEditor;
 using ConfigtEditor.Elements;
+using ConfigEditor.Interfaces;
 
 namespace ConfigtEditor.CustomClass
 {
-    public partial class ConfigUC : ECSUserControl
+    public partial class ConfigUC : ECSUserControl, ISavable
     {
         public ConfigUC()
         {

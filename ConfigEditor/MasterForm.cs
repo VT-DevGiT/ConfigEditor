@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
+using ConfigtEditor.Forms;
 
 namespace ConfigtEditor
 {
@@ -16,7 +17,22 @@ namespace ConfigtEditor
         public MasterForm()
         {
             InitializeComponent();
+            this.FormClosing += MasterForm_FormClosing;
+        }
 
+        private void MasterForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form is ECSChildForm)
+                {
+                    if ((form as ECSChildForm).GetHashCode() == hash)
+                    {
+                        return form;
+                    }
+                }
+            }
+            e.Cancel = true;
         }
     }
 }

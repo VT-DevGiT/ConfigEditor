@@ -51,6 +51,7 @@ namespace ConfigtEditor.ConfigEditor
 
         internal void DeleteListEntry(SymlContentItem element)
         {
+            // a revoir 
             var list = _section.Contents();
             var listToDelete = new List<SymlContentItem>();
             int idxRacine = list.IndexOf(element);

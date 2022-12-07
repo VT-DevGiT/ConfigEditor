@@ -6,6 +6,7 @@ using DevExpress.XtraLayout;
 using DevExpress.XtraSplashScreen;
 using ConfigtEditor.Controls;
 using ConfigtEditor.Utils;
+using ConfigEditor.Interfaces;
 
 namespace ConfigtEditor.Forms
 {
@@ -18,6 +19,17 @@ namespace ConfigtEditor.Forms
         private bool _modal;
         public bool IsModal { get { return _modal; } }
 
+        public bool NeedToSave
+        {
+            get
+            {
+                if (_control is ISavable)
+                {
+                    return (_control as ISavable).NeedToSave;
+                }
+                return false;
+            }
+        }
         public int EditHashCode
         {
             get
