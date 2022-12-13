@@ -17,7 +17,7 @@ using ConfigtEditor.ConfigEditor;
 using ConfigtEditor.Elements;
 using ConfigEditor.Interfaces;
 
-namespace ConfigtEditor.CustomClass
+namespace ConfigtEditor.ConfigEditor
 {
     public partial class ConfigUC : ECSUserControl
     {

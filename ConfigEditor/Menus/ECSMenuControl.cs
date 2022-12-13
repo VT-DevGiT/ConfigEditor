@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq;
+using ConfigtEditor.Elements;
 using ConfigtEditor.Metadatas;
 using ConfigtEditor.Utils;
 using DevExpress.XtraNavBar;

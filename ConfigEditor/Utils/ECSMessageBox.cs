@@ -40,7 +40,7 @@ namespace ConfigtEditor.Utils
             if (String.IsNullOrWhiteSpace(text)) { throw new ArgumentNullException(nameof(text)); }
             if (String.IsNullOrWhiteSpace(title)) { throw new ArgumentNullException(nameof(title)); }
 
-            return XtraMessageBox.Show(text, title, MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
+            return MessageBox.Show(text, title, MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
         }
 
         public static DialogResult ShowWarningWithOk(string text)
@@ -54,7 +54,7 @@ namespace ConfigtEditor.Utils
             if (String.IsNullOrWhiteSpace(text)) { throw new ArgumentNullException(nameof(text)); }
             if (String.IsNullOrWhiteSpace(title)) { throw new ArgumentNullException(nameof(title)); }
 
-            return XtraMessageBox.Show(text, title, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return MessageBox.Show(text, title, MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         public static DialogResult ShowError(string text)
@@ -68,7 +68,7 @@ namespace ConfigtEditor.Utils
             if (String.IsNullOrWhiteSpace(text)) { throw new ArgumentNullException(nameof(text)); }
             if (String.IsNullOrWhiteSpace(title)) { throw new ArgumentNullException(nameof(title)); }
 
-            return XtraMessageBox.Show(text, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return MessageBox.Show(text, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         public static DialogResult ShowQuestion(string text)
@@ -76,7 +76,7 @@ namespace ConfigtEditor.Utils
             // Safe design
             if (String.IsNullOrWhiteSpace(text)) { throw new ArgumentNullException(nameof(text)); }
 
-            return XtraMessageBox.Show(text, ECSFormUtility.ProductFullName, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            return MessageBox.Show(text, ECSFormUtility.ProductFullName, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
         }
 
         public static DialogResult ShowInformation(string text)
@@ -84,7 +84,7 @@ namespace ConfigtEditor.Utils
             // Safe design
             if (String.IsNullOrWhiteSpace(text)) { throw new ArgumentNullException(nameof(text)); }
 
-            return XtraMessageBox.Show(text, ECSFormUtility.ProductFullName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            return MessageBox.Show(text, ECSFormUtility.ProductFullName, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         public static DialogResult ShowResult(string text, string title, bool result)
         {

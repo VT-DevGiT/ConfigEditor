@@ -10,6 +10,7 @@ using ConfigtEditor.Controls;
 using ConfigtEditor.CustomClass;
 using ConfigtEditor.Elements;
 using ConfigtEditor.Utils;
+using ConfigEditor.ServerControl;
 
 namespace ConfigtEditor.Factory
 {
@@ -80,6 +81,7 @@ namespace ConfigtEditor.Factory
                 var ctrl = new SynapseConfigEditorUC(true);
                 return ctrl;
             });
+            Register<ServerControlUC>(() => new ServerControlUC());
             Register<Config>(() => new ConfigUC());
         }
 

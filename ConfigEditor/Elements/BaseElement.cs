@@ -72,13 +72,12 @@ namespace ConfigtEditor.Elements
 		{
 			return (other is null) ? 1 : ToString().CompareTo(other.ToString());
 		}
+        #endregion Methods - IComparable<T>
 
-		#endregion Methods - IComparable<T>
 
+        #region Operators
 
-		#region Operators
-
-		public static bool operator ==(BaseElement left, BaseElement right)
+        public static bool operator ==(BaseElement left, BaseElement right)
 		{
 			dynamic objRight = right;
 			dynamic objleft = left;

@@ -1,4 +1,4 @@
-﻿namespace ConfigtEditor.CustomClass
+﻿namespace ConfigtEditor.ConfigEditor
 {
     partial class ConfigUC
     {
