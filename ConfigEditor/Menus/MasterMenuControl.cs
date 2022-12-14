@@ -57,7 +57,8 @@ namespace ConfigtEditor.Menus
             
             var menuServer = new ECSMenuControl("Server");
             var grpServer = menuServer.AddGroup(new ECSMenuGroup("Common"));
-            grpServer.AddItem<ServerControlUC>();
+            grpServer.AddItem<ServerControlLocal>();
+            grpServer.AddItem<ServerControlRemote>();
 
             menuServer.Visible = true;
             this._tabControl.TabPages.Add(new ECSMenuTabPage(menuServer));

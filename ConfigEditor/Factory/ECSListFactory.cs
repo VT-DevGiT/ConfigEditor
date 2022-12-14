@@ -81,7 +81,8 @@ namespace ConfigtEditor.Factory
                 var ctrl = new SynapseConfigEditorUC(true);
                 return ctrl;
             });
-            Register<ServerControlUC>(() => new ServerControlUC());
+            Register<ServerControlRemote>(() => new ServerControlUC(false));
+            Register<ServerControlLocal>(() => new ServerControlUC(true));
             Register<Config>(() => new ConfigUC());
         }
 

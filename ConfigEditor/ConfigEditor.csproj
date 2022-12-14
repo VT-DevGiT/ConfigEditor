@@ -111,9 +111,13 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
     <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -232,6 +236,8 @@
     <Compile Include="Elements\CompletorType.cs" />
     <Compile Include="Elements\CompletorValue.cs" />
     <Compile Include="Elements\DelStatus.cs" />
+    <Compile Include="Elements\ServerConfig.cs" />
+    <Compile Include="Elements\ServerValue.cs" />
     <Compile Include="Factory\ECSDetailFactory.cs" />
     <Compile Include="Factory\ECSListFactory.cs" />
     <Compile Include="Forms\ECSChildForm.cs">
@@ -254,6 +260,13 @@
     <Compile Include="Managers\CompletorManager.cs" />
     <Compile Include="Managers\CompletorValueManager.cs" />
     <Compile Include="Managers\FixedListManager.cs" />
+    <Compile Include="ServerControl\IServerControl.cs" />
+    <Compile Include="ServerControl\ServerConfigUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ServerControl\ServerConfigUC.Designer.cs">
+      <DependentUpon>ServerConfigUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="ServerControl\ServerControlLocal.cs" />
     <Compile Include="ServerControl\ServerControlRemote.cs" />
     <Compile Include="ServerControl\ServerControlUC.cs">
@@ -262,6 +275,9 @@
     <Compile Include="ServerControl\ServerControlUC.Designer.cs">
       <DependentUpon>ServerControlUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="ServerControl\ServerStade.cs" />
+    <Compile Include="ServerControl\StartInfo.cs" />
+    <Compile Include="ServerControl\TcpServer.cs" />
     <Compile Include="Utils\BindingSourceExtensions.cs" />
     <Compile Include="Utils\ControlExtention.cs" />
     <Compile Include="Utils\ECSDisplayAnalyzer.cs" />
@@ -346,6 +362,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="ServerControl\ServerConfigUC.resx">
+      <DependentUpon>ServerConfigUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ServerControl\ServerControlUC.resx">
       <DependentUpon>ServerControlUC.cs</DependentUpon>
     </EmbeddedResource>

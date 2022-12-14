@@ -197,8 +197,6 @@ namespace ConfigtEditor.ConfigEditor
             _listSection = new ListControl<SymlSection>(_managerSection);
             _panelConfig.Fill(_listSection);
             _listSection.GridView.FocusedRowChanged += GridSection_FocusedRowChanged;
-
-
         }
 
         private Color? GetErrorColor(SymlContentItem elem)

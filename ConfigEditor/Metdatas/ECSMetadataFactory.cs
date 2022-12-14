@@ -93,7 +93,8 @@ namespace ConfigtEditor.Metadatas
             Register<SynapseConfigEditor>("Config Editor", "ICN_PRODUCT_HIERARCHY");
             Register<Config>("Config Editor Parameter", "ICN_CUSTOM_CLASS");
             Register<SynapsePermissionEditor>("Permission Editor", "ICN_ACTION_ELEMENT_DROIT");
-            Register<ServerControlUC>("Server Control", String.Empty);//Found one 
+            Register<ServerControlLocal>("Server Local Control", String.Empty);//Found one 
+            Register<ServerControlRemote>("Server Remote Control", String.Empty);//Found one 
         }
 
         #endregion

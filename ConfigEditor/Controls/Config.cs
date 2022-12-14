@@ -1,4 +1,5 @@
-﻿using ConfigtEditor.ConfigEditor;
+﻿using ConfigEditor.Elements;
+using ConfigtEditor.ConfigEditor;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,7 +17,13 @@ namespace ConfigtEditor.Elements
     {
         [XmlIgnore]
         public static Config Singleton = new Config();
-        
+
+        [XmlElement("ServerConfig")]
+        public ServerConfig ServerConfig 
+        { 
+            get; set; 
+        }
+
         [XmlArray("Completors")]
         [XmlArrayItem("Completor")]
         public List<Completor> Completors
@@ -59,6 +66,17 @@ namespace ConfigtEditor.Elements
         #region Default Value
         public void Default()
         {
+#if DEBUG
+            var serverConfig = new ServerConfig();
+            serverConfig.ExePath = "E:\\Games\\SteamLibrary\\steamapps\\common\\SCP Secret Laboratory Dedicated Server\\SCPSL.exe";
+            serverConfig.ServerIp.Add(new ServerValue("My sweet home", "127.0.0.1", 7777));
+            Singleton.ServerConfig = serverConfig;
+#else
+            var serverConfig = new ServerConfig();
+            Singleton.ServerConfig = serverConfig;
+#endif
+
+
             var completorBool = new Completor();
             completorBool.Id = GetCompletorId();
             completorBool.Name = "Bool";
