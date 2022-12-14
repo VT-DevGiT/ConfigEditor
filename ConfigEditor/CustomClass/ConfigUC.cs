@@ -16,6 +16,7 @@ using ConfigtEditor.Commands;
 using ConfigtEditor.ConfigEditor;
 using ConfigtEditor.Elements;
 using ConfigEditor.Interfaces;
+using DevExpress.XtraGrid.Views.Base;
 
 namespace ConfigtEditor.CustomClass
 {
@@ -38,8 +39,13 @@ namespace ConfigtEditor.CustomClass
             listCompletorValue.Register("Add", new ElementNewCommand<CompletorValue>(managerValueComp), "Add", true, true, shortcut: new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
             listCompletorValue.Register("Edit", new ElementEditCommand<CompletorValue>(managerValueComp), "Edit", true, true, true);
             listCompletorValue.Register("Delete", new ElementDeleteCommand<CompletorValue>(managerValueComp), "Delete", true, true, shortcut: new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
+// Ajout ici
+            listCompletorValue.GridView.AllowSort = DevExpress.Utils.DefaultBoolean.True;
+            listCompletorValue.GridView.CustomColumnSort += SortCol;
+            listCompletorValue.GridView.Columns.FirstOrDefault(p => p.FieldName == nameof(CompletorValue.Value)).SortMode = DevExpress.XtraGrid.ColumnSortMode.Custom;
 
             panelValues.Fill(listCompletorValue);
+
             managerValueComp.LoadList(listCompletor.FocusedElement);
 
             listCompletor.GridView.FocusedRowChanged += (s, e) => managerValueComp.LoadList(listCompletor.FocusedElement);
@@ -53,6 +59,18 @@ namespace ConfigtEditor.CustomClass
             //            listDetail.GridView.Columns.Add(col);
             panelValues.Fill(listDetail);
             */
+        }
+
+        private void SortCol(object sender, CustomColumnSortEventArgs e)
+        {
+            if (e.Column.FieldName == nameof(CompletorValue.Value))
+            {
+                if (int.TryParse((e.Value1 ?? 0).ToString(),  out int valeur1) && int.TryParse((e.Value2 ?? 0).ToString(), out int valeur2))
+                {
+                    e.Result = valeur1.CompareTo(valeur2);
+                    e.Handled = true;
+                }
+            }
         }
     }
 }
