@@ -42,7 +42,7 @@ namespace ConfigtEditor.ConfigEditor
             {
                 var identifier = split[i];
                 var content = split[i + 1];
-
+                /*
                 int lastBracket = content.Length - 1;
                 int firstBracket = 0;
                 for (var i1 = 0; i1 < content.Length; i1++)
@@ -61,7 +61,7 @@ namespace ConfigtEditor.ConfigEditor
                     }
                 }
                 content = content.Substring(firstBracket + 1, lastBracket - firstBracket - 1);
-
+                */
                 content = content
                     .Replace("::lcb::", "[")
                     .Replace("::rcb::", "]")

@@ -70,12 +70,12 @@ namespace ConfigtEditor.ConfigEditor
         }
         public string Serialize()
         {
-            return "[" + Section + "]" + "\n" + "{\n" + Content
+            return "[" + Section + "]" + "\n" + /*"{\n" + */Content
                 .Replace("[", "::lcb::")
                 .Replace("]", "::rcb::")
                 .Replace("{", "::lsb::")
                 .Replace("}", "::rsb::")
-                .Trim() + "\n}\n";
+                .Trim() /*+ "\n}"*/+"\n";
         }
     }
 
