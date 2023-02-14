@@ -3,6 +3,7 @@ using DevExpress.XtraEditors;
 using ConfigtEditor.ConfigEditor;
 using ConfigtEditor.CustomClass;
 using ConfigtEditor.Elements;
+using ConfigEditor.ServerControl;
 
 namespace ConfigtEditor.Menus
 {
@@ -17,6 +18,9 @@ namespace ConfigtEditor.Menus
         {
             InitializeComponent();
 
+            _logoLayout.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+
+/*
             string dir = System.IO.Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath);
 
             if (System.IO.File.Exists($"{dir}\\Logo.png"))
@@ -31,7 +35,7 @@ namespace ConfigtEditor.Menus
             else
             {
                 _logoLayout.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-            }
+            }*/
             CreateMenuTabs();
         }
         #endregion
@@ -42,14 +46,22 @@ namespace ConfigtEditor.Menus
         {
 
             var menuSynapse = new ECSMenuControl("Synapse");
-            var grpClass = menuSynapse.AddGroup(new ECSMenuGroup("Common"));
-            grpClass.AddItem<SynapseConfigEditor>();
-            grpClass.AddItem<SynapsePermissionEditor>();
-            grpClass.AddItem<Config>();
+            var grpConfig = menuSynapse.AddGroup(new ECSMenuGroup("Common"));
+            grpConfig.AddItem<SynapseConfigEditor>();
+            grpConfig.AddItem<Config>();
+            grpConfig.AddItem<SynapsePermissionEditor>(); 
             //grpClass.AddItem<CustomSynapseClass>();
 
             menuSynapse.Visible = true;
             this._tabControl.TabPages.Add(new ECSMenuTabPage(menuSynapse));
+            
+            var menuServer = new ECSMenuControl("Server");
+            var grpServer = menuServer.AddGroup(new ECSMenuGroup("Common"));
+            grpServer.AddItem<ServerControlLocal>();
+            grpServer.AddItem<ServerControlRemote>();
+
+            menuServer.Visible = true;
+            this._tabControl.TabPages.Add(new ECSMenuTabPage(menuServer));
 
             //var menuExiled = new ECSMenuControl("Exiled");
             //menuExiled.Visible = true;

@@ -32,15 +32,15 @@
             this._panelConfig = new DevExpress.XtraEditors.PanelControl();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this._panelDetail = new DevExpress.XtraEditors.PanelControl();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this._panelDetail = new DevExpress.XtraEditors.PanelControl();
             ((System.ComponentModel.ISupportInitialize)(this._layoutControl)).BeginInit();
             this._layoutControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._panelConfig)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this._panelDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._panelDetail)).BeginInit();
             this.SuspendLayout();
             // 
             // _layoutControl
@@ -85,13 +85,6 @@
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
-            // _panelDetail
-            // 
-            this._panelDetail.Location = new System.Drawing.Point(258, 12);
-            this._panelDetail.Name = "_panelDetail";
-            this._panelDetail.Size = new System.Drawing.Size(530, 376);
-            this._panelDetail.TabIndex = 7;
-            // 
             // layoutControlItem3
             // 
             this.layoutControlItem3.Control = this._panelDetail;
@@ -100,6 +93,13 @@
             this.layoutControlItem3.Size = new System.Drawing.Size(534, 380);
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextVisible = false;
+            // 
+            // _panelDetail
+            // 
+            this._panelDetail.Location = new System.Drawing.Point(258, 12);
+            this._panelDetail.Name = "_panelDetail";
+            this._panelDetail.Size = new System.Drawing.Size(530, 376);
+            this._panelDetail.TabIndex = 7;
             // 
             // SynapseConfigEditorUC
             // 
@@ -115,8 +115,8 @@
             ((System.ComponentModel.ISupportInitialize)(this._panelConfig)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this._panelDetail)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._panelDetail)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

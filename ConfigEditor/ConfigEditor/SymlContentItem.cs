@@ -1,5 +1,6 @@
 ﻿using ConfigtEditor.Attributes;
 using ConfigtEditor.Elements;
+using DevExpress.Utils.Serializing.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;

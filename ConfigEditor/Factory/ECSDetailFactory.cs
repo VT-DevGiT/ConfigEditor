@@ -1,4 +1,5 @@
-﻿using ConfigtEditor.ConfigEditor;
+﻿using ConfigEditor.ServerControl;
+using ConfigtEditor.ConfigEditor;
 using ConfigtEditor.Controls;
 using ConfigtEditor.CustomClass;
 using ConfigtEditor.Elements;
@@ -25,6 +26,11 @@ namespace ConfigtEditor.Factory
         }
         #endregion
         #region private
+        private static ECSEditUserControl GetDetailControl(IWriteManager manager, ServerConfigUC element)
+        {
+            return new ServerConfigUC();
+        }
+
         private static ECSEditUserControl GetDetailControl(IWriteManager manager, CustomSynapseClass element)
         {
             return new CustomSynapseClassEditUC(manager);
@@ -34,6 +40,7 @@ namespace ConfigtEditor.Factory
         {
             return new CompletorEditUC(manager);
         }
+
 
         private static ECSEditUserControl GetDetailControl(IWriteManager manager, CompletorValue element)
         {

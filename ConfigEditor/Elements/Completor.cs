@@ -90,6 +90,7 @@ namespace ConfigtEditor.Elements
             }
             return result;
         }
+
         private bool CeckSensitiveInsensitive(string value, string word)
         {
             return CaseSensitive ? value.Contains(word) : value.ToLower().Contains(word.ToLower());

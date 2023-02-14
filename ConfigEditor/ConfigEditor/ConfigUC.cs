@@ -18,7 +18,7 @@ using ConfigtEditor.Elements;
 using ConfigEditor.Interfaces;
 using DevExpress.XtraGrid.Views.Base;
 
-namespace ConfigtEditor.CustomClass
+namespace ConfigtEditor.ConfigEditor
 {
     public partial class ConfigUC : ECSUserControl
     {

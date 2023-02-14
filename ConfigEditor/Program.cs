@@ -1,6 +1,9 @@
-﻿using ConfigtEditor.Elements;
+﻿using ConfigEditor.Utils;
+using ConfigtEditor.Elements;
 using ConfigtEditor.Managers;
 using ConfigtEditor.Utils;
+using DevExpress.Office.Crypto;
+using DevExpress.Skins;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,8 +24,21 @@ namespace ConfigtEditor
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Config.Load();
+            SetTheme();
             ECSFormUtility.MainMdiParent = new MasterForm();
             Application.Run(ECSFormUtility.MainMdiParent);
+        }
+
+        static void SetTheme()
+        {
+            if (Theme.ShouldSystemUseDarkMode())
+            {
+                Theme.SetSkin(19);
+            }
+            else
+            {
+                Theme.SetSkin(18);
+            }
         }
     }
 }

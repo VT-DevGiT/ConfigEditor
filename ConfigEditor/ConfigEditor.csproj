@@ -109,10 +109,16 @@
     <Reference Include="DevExpress.XtraWizard.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <HintPath>..\packages\DevExpress.Win.21.2.3\lib\net452\DevExpress.XtraWizard.v21.2.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
+    <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -122,6 +128,8 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationClient" />
+    <Reference Include="WindowsBase" />
     <Reference Include="YamlDotNet, Version=11.0.0.0, Culture=neutral, PublicKeyToken=ec19458f3c15af5e, processorArchitecture=MSIL">
       <HintPath>..\packages\YamlDotNet.11.2.1\lib\net45\YamlDotNet.dll</HintPath>
     </Reference>
@@ -157,6 +165,7 @@
     <Compile Include="ConfigEditor\SynapseConfigEditorUC.Designer.cs">
       <DependentUpon>SynapseConfigEditorUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Config.cs" />
     <Compile Include="Controls\ECSBar.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -204,10 +213,10 @@
     <Compile Include="CustomClass\CompletorValueEditUC.Designer.cs">
       <DependentUpon>CompletorValueEditUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomClass\ConfigUC.cs">
+    <Compile Include="ConfigEditor\ConfigUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CustomClass\ConfigUC.Designer.cs">
+    <Compile Include="ConfigEditor\ConfigUC.Designer.cs">
       <DependentUpon>ConfigUC.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomClass\CustomSynapseClass.cs" />
@@ -226,8 +235,9 @@
     <Compile Include="Elements\Completor.cs" />
     <Compile Include="Elements\CompletorType.cs" />
     <Compile Include="Elements\CompletorValue.cs" />
-    <Compile Include="Elements\Config.cs" />
     <Compile Include="Elements\DelStatus.cs" />
+    <Compile Include="Elements\ServerConfig.cs" />
+    <Compile Include="Elements\ServerValue.cs" />
     <Compile Include="Factory\ECSDetailFactory.cs" />
     <Compile Include="Factory\ECSListFactory.cs" />
     <Compile Include="Forms\ECSChildForm.cs">
@@ -250,6 +260,24 @@
     <Compile Include="Managers\CompletorManager.cs" />
     <Compile Include="Managers\CompletorValueManager.cs" />
     <Compile Include="Managers\FixedListManager.cs" />
+    <Compile Include="ServerControl\IServerControl.cs" />
+    <Compile Include="ServerControl\ServerConfigUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ServerControl\ServerConfigUC.Designer.cs">
+      <DependentUpon>ServerConfigUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ServerControl\ServerControlLocal.cs" />
+    <Compile Include="ServerControl\ServerControlRemote.cs" />
+    <Compile Include="ServerControl\ServerControlUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ServerControl\ServerControlUC.Designer.cs">
+      <DependentUpon>ServerControlUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ServerControl\ServerStade.cs" />
+    <Compile Include="ServerControl\StartInfo.cs" />
+    <Compile Include="ServerControl\TcpServer.cs" />
     <Compile Include="Utils\BindingSourceExtensions.cs" />
     <Compile Include="Utils\ControlExtention.cs" />
     <Compile Include="Utils\ECSDisplayAnalyzer.cs" />
@@ -287,6 +315,7 @@
     <Compile Include="Utils\GridViewExtensions.cs" />
     <Compile Include="Utils\Memento.cs" />
     <Compile Include="Utils\Singleton.cs" />
+    <Compile Include="Utils\Theme.cs" />
     <EmbeddedResource Include="ConfigEditor\SynapseConfigEditorUC.resx">
       <DependentUpon>SynapseConfigEditorUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -305,7 +334,7 @@
     <EmbeddedResource Include="CustomClass\CompletorValueEditUC.resx">
       <DependentUpon>CompletorValueEditUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CustomClass\ConfigUC.resx">
+    <EmbeddedResource Include="ConfigEditor\ConfigUC.resx">
       <DependentUpon>ConfigUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomClass\CustomSynapseClassEditUC.resx">
@@ -333,6 +362,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="ServerControl\ServerConfigUC.resx">
+      <DependentUpon>ServerConfigUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ServerControl\ServerControlUC.resx">
+      <DependentUpon>ServerControlUC.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\ScriptEditor.ConfigEditor.Room.datasource" />
     <None Include="Properties\DataSources\ScriptEditor.CustomClass.CustomSynapseClass.datasource" />
