@@ -12,47 +12,46 @@ using System.Runtime.InteropServices;
 using System.Buffers;
 using DevExpress.Xpo.Logger;
 using System.Drawing;
+using DevExpress.Internal.WinApi.Windows.UI.Notifications;
+using DevExpress.XtraPrinting;
 
 namespace ConfigEditor.ServerControl
 {
     public class TcpServer
     {
-        private bool _disposing;
-        private NetworkStream _stream;
         private readonly Logger _logger;
         private readonly int _port;
-        private readonly TcpClient _client;
+        private readonly TcpListener _listener;
         private readonly Thread _receiveThread;
-        private readonly Thread _queueThread;
-        private readonly ConcurrentQueue<IOutputEntry> _prompterQueue = new ConcurrentQueue<IOutputEntry>();
+        private readonly Thread _sendThread;
         private readonly UTF8Encoding _utf8;
+        private NetworkStream _stream;
+
+        private TcpClient _client;
+
+        private bool _disposing;
 
         public TcpServer(int port, Logger logger)
         {
-            _logger = logger;
-            _client = new TcpClient();
+            _port = port;
+            _utf8 = new UTF8Encoding();
+
             _receiveThread = new Thread(new ThreadStart(Receive))
             {
                 Priority = System.Threading.ThreadPriority.Lowest,
                 IsBackground = true,
-                Name = "Config Editor input"
+                Name = "Config Editor TCP input"
             };
-            _queueThread = new Thread(new ThreadStart(Send))
-            {
-                Priority = System.Threading.ThreadPriority.Lowest,
-                IsBackground = true,
-                Name = "Config Editor output"
-            };
-            _port = port;
-            _utf8 = new UTF8Encoding();
-        }
 
-        public void Start()
-        {
-            _client.Connect(new IPEndPoint(IPAddress.Loopback, (int)_port));
-            _stream = _client.GetStream();
-            _queueThread.Start();
-            _receiveThread.Start();
+            _logger = logger;
+            _listener = new TcpListener(new IPEndPoint(IPAddress.Loopback, _port));
+            _listener.Start();
+            _listener.BeginAcceptTcpClient(callBack =>
+            {
+                _client = _listener.EndAcceptTcpClient(callBack);
+                _stream = _client.GetStream();
+                _receiveThread.Start();
+            }, _listener);
         }
 
         public void Dispose()
@@ -64,14 +63,8 @@ namespace ConfigEditor.ServerControl
                     _receiveThread.Abort();
             }
             catch { }
-            try
-            {
-                if (_queueThread.IsAlive)
-                    _queueThread.Abort();
-            }
-            catch { }
             _stream?.Dispose();
-            _client.Dispose();
+            _client?.Dispose();
         }
 
         private void Receive()
@@ -101,48 +94,62 @@ namespace ConfigEditor.ServerControl
         {
             if (string.IsNullOrWhiteSpace(text))
                 return;
-            _logger?.Invoke(text, Color.FromName(color.ToString()), false);
+            _logger.Invoke(text, Color.FromName(color.ToString()), false);
         }
 
         public void AddLog(string text) => AddLog(text, ConsoleColor.Gray);
 
-        public void AddOutput(IOutputEntry entry)
+        public void Send(string message)
         {
-            _prompterQueue.Enqueue(entry);
-        }
-
-        private void Send()
-        {
-            while (!_disposing)
+            try
             {
-                if (_prompterQueue.Count == 0)
-                {
-                    Thread.Sleep(25);
-                }
-                else
-                {
-                    try
-                    {
-                        IOutputEntry result;
-                        if (_prompterQueue.TryDequeue(out result))
-                        {
-                            byte[] buffer = ArrayPool<byte>.Shared.Rent(result.GetBytesLength());
-                            int length;
-                            result.GetBytes(ref buffer, out length);
-                            _stream.Write(buffer, 0, length);
-                            ArrayPool<byte>.Shared.Return(buffer);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        AddLog("[TcpClient] Send exception: " + ex.Message);
-                        AddLog("[TcpClient] " + ex.StackTrace);
-                    }
-                }
+                var textEntry = new TextOutputEntry(message, ConsoleColor.DarkYellow, _utf8);
+                var buffer = ArrayPool<byte>.Shared.Rent(textEntry.GetBytesLength());
+                textEntry.GetBytes(ref buffer, out var length);
+                this._stream.Write(buffer, 0, length);
+                ArrayPool<byte>.Shared.Return(buffer);
+                _stream.Write(buffer, 0, length);
+            }
+            catch (Exception ex)
+            {
+                AddLog("[TcpClient] Send exception: " + ex.Message);
+                AddLog("[TcpClient] " + ex.StackTrace);
             }
         }
-
     }
+
+    public struct TextOutputEntry : IOutputEntry
+    {
+        public readonly string Text;
+        public readonly byte Color;
+        public readonly UTF8Encoding Encoding;
+        private const int offset = 5;
+
+        public TextOutputEntry(string text, ConsoleColor color, UTF8Encoding encoding)
+        {
+            Text = text;
+            Color = (byte)color;
+            Encoding = encoding;
+        }
+
+        private string HexColor => Color.ToString("X");
+
+        public string GetString() => HexColor + Text;
+
+        public int GetBytesLength() => Encoding.GetMaxByteCount(Text.Length) + 5;
+
+        public void GetBytes(ref byte[] buffer, out int length)
+        {
+            length = Encoding.GetBytes(Text, 0, Text.Length, buffer, 5);
+            buffer[0] = this.Color;
+            buffer[1] = (byte)((length & 4278190080L)   >> 24);
+            buffer[2] = (byte)((length & 16711680)      >> 16);
+            buffer[3] = (byte)((length & 65280)         >> 8);
+            buffer[4] = (byte)( length & byte.MaxValue);
+            length += 5;
+        }
+    }
+
 
     public interface IOutputEntry
     {

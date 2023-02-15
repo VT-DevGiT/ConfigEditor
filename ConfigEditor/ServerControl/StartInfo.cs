@@ -12,13 +12,10 @@ namespace ConfigEditor.ServerControl
 
         public ushort Port { get; set; }
 
-        public bool CrashRestart { get; set; }
-
-        public StartInfo(string expePath, ushort port, bool crashRestart)
+        public StartInfo(string expePath, ushort port)
         {
             ExePath = expePath;
             Port = port;
-            CrashRestart = crashRestart;
         }
     }
 }

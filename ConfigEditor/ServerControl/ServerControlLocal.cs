@@ -3,10 +3,12 @@ using ConfigtEditor.Controls;
 using ConfigtEditor.Elements;
 using ConfigtEditor.Utils;
 using DevExpress.DataProcessing.InMemoryDataProcessor;
+using DevExpress.XtraPrinting;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -21,17 +23,12 @@ namespace ConfigEditor.ServerControl
         public event Logger Log;
         public event ServerStop ServerStop;
 
-        private readonly ushort _portTcp;
         public TcpServer _tcpServer;
+
+        private ushort _portTcp;
         private Process _process;
-
-        private bool _runing;
         private ServerStade _stade = ServerStade.WhaitConfig;
-
-        public ServerControlLocal()
-        {
-            _portTcp = FreeTcpPort();
-        }
+        private bool _runing;
 
         public ServerStade Stade
         {
@@ -56,11 +53,12 @@ namespace ConfigEditor.ServerControl
             }
         }
 
-        private void SendLog(string message, Color? color = null)
-        {
-            Log?.Invoke(message, color ?? Color.Transparent, false);
-        }
+        private void SendLog(string message, bool fromeUser = false) => SendLog(message, Color.Transparent, fromeUser);
 
+        private void SendLog(string message, Color color, bool fromeUser = false)
+        {
+            Log?.Invoke(message, color, fromeUser);
+        }
 
         public void Start()
         {
@@ -68,7 +66,7 @@ namespace ConfigEditor.ServerControl
             _stade = ServerStade.WhaitConfig;
             if (!SelectServer(out var info))
             {
-                ServerStop?.Invoke();
+                ServerStop?.Invoke(true);
                 return;
             }
             if (Config.Singleton.ServerConfig == null)
@@ -77,10 +75,12 @@ namespace ConfigEditor.ServerControl
                 {
                     ExePath = info.ExePath
                 };
+                Config.Singleton.Save();
             }
             else
             {
                 Config.Singleton.ServerConfig.ExePath = info.ExePath;
+                Config.Singleton.Save();
             }
             _stade = ServerStade.Starting;
             StartPorcess(info);
@@ -100,27 +100,34 @@ namespace ConfigEditor.ServerControl
         public bool StartPorcess(StartInfo info)
         {
             if (_tcpServer == null)
-                _tcpServer = new TcpServer(_portTcp, Log.Invoke) ;
+            {
+                _portTcp = FreeTcpPort();
+                _tcpServer = new TcpServer(_portTcp, SendLog);
+            }
 
             int proccessID = Process.GetCurrentProcess().Id;
             int port = info.Port;
-            string startArg = $"-id{proccessID} -console{_portTcp} -port{port} -batchmode -nographics -nodedicateddelete ";
+            string directory = Path.GetDirectoryName(info.ExePath);
 
-            if (info.CrashRestart) 
-                startArg += "-heartbeat";
-
-            ProcessStartInfo startInfo = new ProcessStartInfo(info.ExePath, startArg)
+            ProcessStartInfo startInfo = new ProcessStartInfo(info.ExePath)
             {
                 UseShellExecute = false,
                 CreateNoWindow = true,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
+                WorkingDirectory = directory,
             };
+
+
             SendLog($"Start server on port: {port}.\n", Color.Red);
             _process = Process.Start(startInfo);
+            _process.EnableRaisingEvents = true;
             _process.Exited += OnExited;
-            _process.OutputDataReceived += StdOut;
-            _process.ErrorDataReceived += StdErr;
+            _process.OutputDataReceived += OutPutData;
+            _process.ErrorDataReceived += OutPutError;
+            _process.BeginOutputReadLine();
+            _process.BeginErrorReadLine();
+
             return true;
         }
 
@@ -128,6 +135,7 @@ namespace ConfigEditor.ServerControl
         {
             _runing = false;
             _stade = ServerStade.Stop;
+            ServerStop?.Invoke(false);
         }
 
         public bool SendCommand(string command)
@@ -137,15 +145,16 @@ namespace ConfigEditor.ServerControl
                 SendLog("You need to start the server first", Color.Red);
                 return false;
             }
+            _tcpServer.Send(command);
             return true;
         }
 
-        private void StdErr(object sender, DataReceivedEventArgs e)
+        private void OutPutError(object sender, DataReceivedEventArgs e)
         {
             SendLog(e.Data, Color.DarkRed);
         }
 
-        private void StdOut(object sender, DataReceivedEventArgs e)
+        private void OutPutData(object sender, DataReceivedEventArgs e)
         {
             SendLog(e.Data, Color.Blue);
         }

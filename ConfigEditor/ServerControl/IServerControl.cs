@@ -7,7 +7,7 @@ namespace ConfigEditor.ServerControl
 
     public delegate void Logger(string text, Color color, bool formUser);
 
-    public delegate void ServerStop();
+    public delegate void ServerStop(bool closeForm);
     public interface IServerControl : IDisposable
     {
         event Logger Log;

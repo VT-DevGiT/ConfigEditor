@@ -15,7 +15,7 @@ namespace ConfigEditor.ServerControl
             get
             {
                 ushort.TryParse(this._port.Text, out ushort port);
-                return new StartInfo(this._filePath.Text, port, this._restart.CausesValidation);
+                return new StartInfo(this._filePath.Text, port);
             }  
         }
 

@@ -17,12 +17,18 @@ using static DevExpress.Utils.Drawing.Helpers.NativeMethods;
 using DevExpress.Office.Utils;
 using ConfigtEditor.Commands;
 using ConfigtEditor.Utils;
+using System.Threading;
 
 namespace ConfigEditor.ServerControl
 {
     public partial class ServerControlUC : DevExpress.XtraEditors.XtraUserControl
     {
-        IServerControl _serverControl;
+        private readonly Thread _mainThread;
+
+        private IServerControl _serverControl;
+        private Queue<(string text, Color color, bool formUser)> _pandingLog;
+        private object _logLocker = new object();
+        private Task _readLog;
 
         public ServerControlUC(bool local)
         {
@@ -41,22 +47,63 @@ namespace ConfigEditor.ServerControl
             {
                 _serverControl = new ServerControlRemote();
             }
+            _pandingLog = new Queue<(string text, Color color, bool formUser)>();
+            _mainThread = Thread.CurrentThread;
+            _readLog = ReadLog();
             _serverControl.Log += AddLog;
             this.Load += (s, e) =>
             {
                 var form = this.FindForm();
                 form.Shown += CallStart;
+                _serverControl.ServerStop += OnServerStop;
                 form.FormClosing += (fs, fe) =>
                 {
                     this._serverControl.Kill();
                     this._serverControl.Dispose();
                 };
             };
+        }
 
-            void CallStart(object fs, EventArgs fe)
+        private async Task ReadLog()
+        {
+            while (true)
+            {
+                int logsCount;
+                lock (_logLocker)
+                {
+                    logsCount = _pandingLog.Count;
+                }
+                if (logsCount == 0)
+                {
+                    await Task.Delay(500);
+                    continue;
+                }
+                (string, Color, bool) log;
+                lock (_logLocker)
+                {
+                    log = _pandingLog.Dequeue();
+                }
+                AddLog(log.Item1, log.Item2, log.Item3);
+
+            }
+        }
+
+        private void OnServerStop(bool closeForm)
+        {
+            if (closeForm)
+            {
+                _serverControl.ServerStop -= OnServerStop;
+                this.FindForm().Close();
+            }
+        }
+
+        void CallStart(object fs, EventArgs fe)
+        {
+            var form = this.FindForm();
+            if (form != null)//Null when the user abort the start
             {
                 _serverControl.Start();
-                this.FindForm().Shown -= CallStart;
+                form.Shown -= CallStart;
             }
         }
 
@@ -71,13 +118,23 @@ namespace ConfigEditor.ServerControl
 
         private void AddLog(string text, Color color, bool formUser)
         {
-            text += "\n";
-            var document = this._consoleLog.Document;
-            DocumentRange range = document.AppendText(formUser ? "▌" + text : text);
-            CharacterProperties cp = document.BeginUpdateCharacters(range);
-            if (color != Color.Transparent)
-                cp.ForeColor = color;
-            document.EndUpdateCharacters(cp);
+            if (Thread.CurrentThread == _mainThread)
+            {
+                text += "\n";
+                var document = this._consoleLog.Document;
+                DocumentRange range = document.AppendText(formUser ? "▌" + text : text);
+                CharacterProperties cp = document.BeginUpdateCharacters(range);
+                if (color != Color.Transparent)
+                    cp.ForeColor = color;
+                document.EndUpdateCharacters(cp);
+            }
+            else
+            {
+                lock(_logLocker)
+                {
+                    _pandingLog.Enqueue((text, color, formUser));
+                }
+            }
         }
 
         private void AddLog(string text, bool formUser)

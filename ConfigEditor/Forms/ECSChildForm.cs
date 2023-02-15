@@ -67,6 +67,7 @@ namespace ConfigtEditor.Forms
             };
         }
 
+
         public ECSChildForm(string title, Control control, bool modal) : this()
         {
             // Safe design
