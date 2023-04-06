@@ -34,9 +34,10 @@ namespace ConfigtEditor.ConfigEditor
             File.WriteAllText(_path, text);
         }
 
-        public static Dictionary<string, ConfigSection> ParseString(string str)
+        public static Dictionary<string, ConfigSection> ParseString(string source)
         {
             var sections = new Dictionary<string, ConfigSection>();
+            var str = source.Replace("[]", "::lcb::::rcb::");
             var split = str.Split(new string[] { "[", "]" }, StringSplitOptions.None);
             for (var i = 1; i < split.Length; i += 2)
             {
