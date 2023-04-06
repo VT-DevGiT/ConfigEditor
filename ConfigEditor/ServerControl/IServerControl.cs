@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if SERVER_CONTROL
+using System;
 using System.Drawing;
 using System.Threading.Tasks;
 
@@ -23,3 +24,4 @@ namespace ConfigEditor.ServerControl
         bool SendCommand(string command);
     }
 }
+#endif

@@ -1,4 +1,5 @@
-﻿namespace ConfigEditor.ServerControl
+﻿#if SERVER_CONTROL
+namespace ConfigEditor.ServerControl
 {
     partial class ServerControlUC
     {
@@ -180,3 +181,4 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
     }
 }
+#endif

@@ -1,4 +1,5 @@
-﻿using ConfigEditor.Utils;
+﻿#if SERVER_CONTROL
+using ConfigEditor.Utils;
 using DevExpress.Emf;
 using DevExpress.PivotGrid.QueryMode.Sorting;
 using DevExpress.XtraEditors;
@@ -149,3 +150,4 @@ namespace ConfigEditor.ServerControl
         }
     }
 }
+#endif

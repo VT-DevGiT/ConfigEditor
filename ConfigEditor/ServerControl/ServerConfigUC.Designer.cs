@@ -1,4 +1,5 @@
-﻿namespace ConfigEditor.ServerControl
+﻿#if SERVER_CONTROL
+namespace ConfigEditor.ServerControl
 {
     partial class ServerConfigUC
     {
@@ -118,3 +119,4 @@
         private DevExpress.Utils.Behaviors.BehaviorManager behaviorManager1;
     }
 }
+#endif

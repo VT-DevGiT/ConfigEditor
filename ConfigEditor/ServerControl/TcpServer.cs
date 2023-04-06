@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.Sockets;
+#if SERVER_CONTROL
 using System.Net;
 using System.Text;
 using System.Threading;
@@ -171,3 +172,4 @@ namespace ConfigEditor.ServerControl
         ExitActionRestart = 22,         // 0x16
     }
 }
+#endif

@@ -10,7 +10,9 @@ using ConfigtEditor.Controls;
 using ConfigtEditor.CustomClass;
 using ConfigtEditor.Elements;
 using ConfigtEditor.Utils;
+#if SERVER_CONTROL
 using ConfigEditor.ServerControl;
+#endif
 
 namespace ConfigtEditor.Factory
 {
@@ -81,8 +83,10 @@ namespace ConfigtEditor.Factory
                 var ctrl = new SynapseConfigEditorUC(true);
                 return ctrl;
             });
+#if SERVER_CONTROL
             Register<ServerControlRemote>(() => new ServerControlUC(false));
             Register<ServerControlLocal>(() => new ServerControlUC(true));
+#endif
             Register<Config>(() => new ConfigUC());
         }
 
@@ -106,6 +110,6 @@ namespace ConfigtEditor.Factory
             }
         }
 
-        #endregion
+#endregion
     }
 }

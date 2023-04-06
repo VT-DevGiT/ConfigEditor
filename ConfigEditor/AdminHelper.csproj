@@ -261,17 +261,13 @@
     <Compile Include="Managers\CompletorValueManager.cs" />
     <Compile Include="Managers\FixedListManager.cs" />
     <Compile Include="ServerControl\IServerControl.cs" />
-    <Compile Include="ServerControl\ServerConfigUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="ServerControl\ServerConfigUC.cs" />
     <Compile Include="ServerControl\ServerConfigUC.Designer.cs">
       <DependentUpon>ServerConfigUC.cs</DependentUpon>
     </Compile>
     <Compile Include="ServerControl\ServerControlLocal.cs" />
     <Compile Include="ServerControl\ServerControlRemote.cs" />
-    <Compile Include="ServerControl\ServerControlUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="ServerControl\ServerControlUC.cs" />
     <Compile Include="ServerControl\ServerControlUC.Designer.cs">
       <DependentUpon>ServerControlUC.cs</DependentUpon>
     </Compile>

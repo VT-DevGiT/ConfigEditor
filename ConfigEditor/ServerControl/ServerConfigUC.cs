@@ -1,4 +1,5 @@
-﻿using ConfigtEditor.Commands;
+﻿#if SERVER_CONTROL
+using ConfigtEditor.Commands;
 using ConfigtEditor.Controls;
 using ConfigtEditor.Elements;
 using ConfigtEditor.Utils;
@@ -50,3 +51,4 @@ namespace ConfigEditor.ServerControl
         }
     }
 }
+#endif

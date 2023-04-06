@@ -1,10 +1,11 @@
-﻿using ConfigEditor.ServerControl;
+﻿#if SERVER_CONTROL
+using ConfigEditor.ServerControl;
+#endif
 using ConfigtEditor.ConfigEditor;
 using ConfigtEditor.CustomClass;
 using ConfigtEditor.Elements;
 using ConfigtEditor.Utils;
 using System;
-using System.Reflection;
 
 namespace ConfigtEditor.Metadatas
 {
@@ -93,10 +94,12 @@ namespace ConfigtEditor.Metadatas
             Register<SynapseConfigEditor>("Config Editor", "ICN_PRODUCT_HIERARCHY");
             Register<Config>("Config Editor Parameter", "ICN_CUSTOM_CLASS");
             Register<SynapsePermissionEditor>("Permission Editor", "ICN_ACTION_ELEMENT_DROIT");
+#if SERVER_CONTROL
             Register<ServerControlLocal>("Server Local Control", String.Empty);//Found one 
             Register<ServerControlRemote>("Server Remote Control", String.Empty);//Found one 
+#endif
         }
 
-        #endregion
+#endregion
     }
 }

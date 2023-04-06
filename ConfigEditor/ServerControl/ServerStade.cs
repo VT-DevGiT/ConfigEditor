@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if SERVER_CONTROL
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,3 +15,4 @@ namespace ConfigEditor.ServerControl
         Stop
     }
 }
+#endif
