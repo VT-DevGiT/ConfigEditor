@@ -1,11 +1,6 @@
 # Config Editor 
 
-Config Editor is a software developed to facilitate editing of SCP sl configs.
-
-## Synapse
-
-It works acutely only whit Synapse2 config. 
-When Synapse3 is released changes will be made to support it.
+Config Editor is a software developed to facilitate editing of neuron configs.
 
 ## Bug
 
